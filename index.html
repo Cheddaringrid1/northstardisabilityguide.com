@@ -252,7 +252,7 @@
       <div class="nav-sec">My Journey</div>
       <div class="ni on" onclick="go('db',this)"><span class="ni-ic">🏠</span><span class="ni-lb">Dashboard</span></div>
       <div class="ni" onclick="go('rm',this)"><span class="ni-ic">🗺️</span><span class="ni-lb">My Roadmap</span></div>
-      <div class="ni" onclick="go('dl',this)"><span class="ni-ic">⏰</span><span class="ni-lb">Deadlines</span><span class="nb r">2</span></div>
+      <div class="ni" onclick="go('dl',this)"><span class="ni-ic">⏰</span><span class="ni-lb">Deadlines</span></div>
       <div class="ni" onclick="go('ap',this)"><span class="ni-ic">📅</span><span class="ni-lb">Appointments</span></div>
       <div class="ni" onclick="go('in',this)"><span class="ni-ic">💰</span><span class="ni-lb">Income Tracker</span></div>
       <div class="nav-sec">Evidence &amp; Forms</div>
@@ -298,9 +298,9 @@
         </div>
         <div class="g4">
           <div class="st"><div class="st-n">—</div><div class="st-l">Days to Hearing</div></div>
-          <div class="st"><div class="st-n">7</div><div class="st-l">Doctors on File</div></div>
-          <div class="st"><div class="st-n">4</div><div class="st-l">RFCs Collected</div></div>
-          <div class="st"><div class="st-n">2</div><div class="st-l">Active Deadlines</div></div>
+          <div class="st"><div class="st-n">0</div><div class="st-l">Doctors on File</div></div>
+          <div class="st"><div class="st-n">0</div><div class="st-l">RFCs Collected</div></div>
+          <div class="st"><div class="st-n">0</div><div class="st-l">Active Deadlines</div></div>
         </div>
         <div class="g2">
           <div>
@@ -320,9 +320,13 @@
           </div>
           <div>
             <div class="sl">Upcoming Deadlines</div>
-            <div class="rw" style="border-left:3px solid #e05050;margin-bottom:8px"><div class="d8" style="background:#e05050;box-shadow:0 0 6px #e05050"></div><div style="flex:1"><div class="rw-n">Submit Additional Evidence</div><div class="rw-s">Due June 2, 2026</div></div><div class="bx re">18 days</div></div>
-            <div class="rw" style="border-left:3px solid #f0c040;margin-bottom:8px"><div class="d8" style="background:#f0c040"></div><div style="flex:1"><div class="rw-n">ALJ Hearing Date</div><div class="rw-s">June 15, 2026</div></div><div class="bx go">31 days</div></div>
-            <div class="rw" style="border-left:3px solid #50c050;margin-bottom:20px"><div class="d8" style="background:#50c050"></div><div style="flex:1"><div class="rw-n">Date Last Insured (DLI)</div><div class="rw-s">Dec 31, 2027</div></div><div class="bx gr">595 days</div></div>
+            <div style="text-align:center;padding:32px 16px;color:rgba(255,255,255,.25)">
+              <div style="font-size:28px;margin-bottom:10px;color:rgba(240,192,64,.2)">&#9200;</div>
+              <div style="font-size:13px;color:rgba(255,255,255,.35);margin-bottom:6px">No deadlines added yet</div>
+              <div style="font-size:11px;line-height:1.6;max-width:220px;margin:0 auto">Go to Deadlines in the sidebar to track your important dates.</div>
+            </div>
+            
+            <div class="rw" style="border-left:3px solid #50c050;margin-bottom:20px">
             <div class="sl">Quick Access</div>
             <div class="g2" style="margin-bottom:0">
               <div class="cd" style="padding:14px" onclick="go('rf',document.querySelector('[onclick*=rf]'))"><div class="cd-ic" style="font-size:18px">&#128193;</div><div class="cd-t" style="font-size:12px">RFC Forms</div><div class="cd-a" style="font-size:10px;margin-top:6px">Open &#8594;</div></div>
@@ -350,84 +354,68 @@
       </div>
 
       <!-- DEADLINES -->
-      <div class="sc" id="s-dl">
+          <div class="sc" id="s-dl">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:28px">
           <div><div class="pt">Deadline <span>Tracker</span></div><div style="font-size:13px;color:rgba(255,255,255,0.4)">SSA appeal deadlines are fixed. Track every window, hearing date, and response deadline.</div></div>
           <button class="addb">+ Add Deadline</button>
         </div>
         <div class="g4">
-          <div class="st" style="border-color:rgba(220,60,60,0.2)"><div class="st-n" style="color:#ff7070">1</div><div class="st-l">Critical &mdash; 14 days</div></div>
-          <div class="st" style="border-color:rgba(240,150,40,0.2)"><div class="st-n" style="color:#f09040">1</div><div class="st-l">Act Soon &mdash; 30 days</div></div>
+          <div class="st" style="border-color:rgba(220,60,60,0.2)"><div class="st-n" style="color:#ff7070">0</div><div class="st-l">Critical &mdash; 14 days</div></div>
+          <div class="st" style="border-color:rgba(240,150,40,0.2)"><div class="st-n" style="color:#f09040">0</div><div class="st-l">Act Soon &mdash; 30 days</div></div>
           <div class="st"><div class="st-n">0</div><div class="st-l">Upcoming &mdash; 90 days</div></div>
-          <div class="st" style="border-color:rgba(80,200,80,0.2)"><div class="st-n" style="color:#60d060">1</div><div class="st-l">On Track &mdash; 90+ days</div></div>
+          <div class="st" style="border-color:rgba(80,200,80,0.2)"><div class="st-n" style="color:#60d060">0</div><div class="st-l">Future</div></div>
         </div>
         <div class="sl">Active Deadlines</div>
-        <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:10px;overflow:hidden;margin-bottom:20px">
-          <div style="padding:16px 20px;display:flex;align-items:center;gap:14px;border-bottom:1px solid rgba(255,255,255,0.05)"><div class="d8" style="background:#e05050;box-shadow:0 0 6px #e05050"></div><div style="flex:1"><div style="font-size:13px;font-weight:600;margin-bottom:2px">Submit Additional Evidence</div><div style="font-size:11px;color:rgba(255,255,255,0.35)">Due: June 2, 2026</div></div><div class="bx re">18 days left</div></div>
-          <div style="padding:16px 20px;display:flex;align-items:center;gap:14px;border-bottom:1px solid rgba(255,255,255,0.05)"><div class="d8" style="background:#f0c040"></div><div style="flex:1"><div style="font-size:13px;font-weight:600;margin-bottom:2px">ALJ Hearing Date</div><div style="font-size:11px;color:rgba(255,255,255,0.35)">Scheduled: June 15, 2026</div></div><div class="bx go">31 days left</div></div>
-          <div style="padding:16px 20px;display:flex;align-items:center;gap:14px"><div class="d8" style="background:#50c050"></div><div style="flex:1"><div style="font-size:13px;font-weight:600;margin-bottom:2px">Date Last Insured (DLI)</div><div style="font-size:11px;color:rgba(255,255,255,0.35)">Expires: Dec 31, 2027</div></div><div class="bx gr">595 days left</div></div>
+        <div style="text-align:center;padding:48px 24px;color:rgba(255,255,255,.25)">
+          <div style="font-size:36px;margin-bottom:14px;color:rgba(240,192,64,.2)">&#9200;</div>
+          <div style="font-family:Georgia,serif;font-size:16px;font-weight:300;margin-bottom:8px;color:rgba(255,255,255,.35)">No deadlines added yet</div>
+          <div style="font-size:12px;line-height:1.7;max-width:280px;margin:0 auto">Click + Add Deadline to start tracking your SSA appeal deadlines, hearing dates, and response windows.</div>
         </div>
-        <div class="disc">Always confirm deadlines with your attorney or advocate. North Star does not provide legal advice.</div>
+        <div class="disc">North Star is an informational and organizational tool only. It does not provide legal advice. Always verify deadlines with SSA directly or with your attorney or advocate.</div>
       </div>
 
-      <!-- APPOINTMENTS -->
-      <div class="sc" id="s-ap">
+        <div class="sc" id="s-ap">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:28px">
-          <div><div class="pt">Appointment <span>Tracker</span></div><div style="font-size:13px;color:rgba(255,255,255,0.4)">Every medical visit is part of the record.</div></div>
+          <div><div class="pt">Appointment <span>Tracker</span></div><div style="font-size:13px;color:rgba(255,255,255,0.4)">Track medical appointments, hearings, and consultations. Document what was discussed and any follow-up needed.</div></div>
           <button class="addb">+ Add Appointment</button>
         </div>
         <div class="g4">
-          <div class="st"><div class="st-n">3</div><div class="st-l">Upcoming</div></div>
-          <div class="st"><div class="st-n">7</div><div class="st-l">Total Logged</div></div>
-          <div class="st"><div class="st-n">4</div><div class="st-l">Providers</div></div>
-          <div class="st" style="border-color:rgba(240,192,64,0.2)"><div class="st-n" style="color:#f0c040">2</div><div class="st-l">Records Pending</div></div>
+          <div class="st"><div class="st-n">0</div><div class="st-l">Total</div></div>
+          <div class="st"><div class="st-n">0</div><div class="st-l">Upcoming</div></div>
+          <div class="st"><div class="st-n">0</div><div class="st-l">This Month</div></div>
+          <div class="st" style="border-color:rgba(220,60,60,0.2)"><div class="st-n" style="color:#ff7070">0</div><div class="st-l">CE Scheduled</div></div>
         </div>
-        <div class="wb"><strong>&#9888; Consultative Exam Scheduled</strong>A CE appointment is on file. Attendance is required. Failure to attend without good cause can affect the determination.</div>
         <div class="sl">Upcoming Appointments</div>
-        <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(80,140,220,0.15);border-radius:8px;padding:14px 18px;display:flex;gap:14px;margin-bottom:8px">
-          <div style="text-align:center;background:rgba(255,255,255,0.04);border-radius:6px;padding:8px;width:52px;flex-shrink:0"><div style="font-size:9px;color:rgba(255,255,255,0.3)">MAY</div><div style="font-size:20px;font-weight:700;color:#f0c040;line-height:1">29</div><div style="font-size:9px;color:rgba(255,255,255,0.25)">2026</div></div>
-          <div style="flex:1"><div style="font-size:13px;font-weight:600;margin-bottom:2px">Dr. Sarah Patel</div><div style="font-size:11px;color:rgba(255,255,255,0.4);margin-bottom:4px">Pain Management &middot; 10:30 AM</div><span class="bx dr">Treating</span></div>
-          <div style="font-size:10px;color:#f0c040;align-self:center">Records Pending</div>
-        </div>
-        <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(140,100,220,0.15);border-radius:8px;padding:14px 18px;display:flex;gap:14px;margin-bottom:8px">
-          <div style="text-align:center;background:rgba(255,255,255,0.04);border-radius:6px;padding:8px;width:52px;flex-shrink:0"><div style="font-size:9px;color:rgba(255,255,255,0.3)">JUN</div><div style="font-size:20px;font-weight:700;color:#f0c040;line-height:1">3</div><div style="font-size:9px;color:rgba(255,255,255,0.25)">2026</div></div>
-          <div style="flex:1"><div style="font-size:13px;font-weight:600;margin-bottom:2px">Dr. James Okonkwo</div><div style="font-size:11px;color:rgba(255,255,255,0.4);margin-bottom:4px">Psychiatry &middot; 2:00 PM</div><span class="bx mn">Therapy</span></div>
-          <div style="font-size:10px;color:rgba(255,255,255,0.3);align-self:center">Not Requested</div>
-        </div>
-        <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(220,60,60,0.2);border-radius:8px;padding:14px 18px;display:flex;gap:14px;margin-bottom:8px">
-          <div style="text-align:center;background:rgba(255,255,255,0.04);border-radius:6px;padding:8px;width:52px;flex-shrink:0"><div style="font-size:9px;color:rgba(255,255,255,0.3)">JUN</div><div style="font-size:20px;font-weight:700;color:#f0c040;line-height:1">8</div><div style="font-size:9px;color:rgba(255,255,255,0.25)">2026</div></div>
-          <div style="flex:1"><div style="font-size:13px;font-weight:600;margin-bottom:2px">SSA Consultative Examiner</div><div style="font-size:11px;color:rgba(255,255,255,0.4);margin-bottom:4px">Internal Medicine &middot; 9:00 AM</div><span class="bx re">CE Exam</span></div>
-          <div style="font-size:10px;color:rgba(255,255,255,0.3);align-self:center">Not Requested</div>
+        <div style="text-align:center;padding:48px 24px;color:rgba(255,255,255,.25)">
+          <div style="font-size:36px;margin-bottom:14px;color:rgba(240,192,64,.2)">&#128197;</div>
+          <div style="font-family:Georgia,serif;font-size:16px;font-weight:300;margin-bottom:8px;color:rgba(255,255,255,.35)">No appointments added yet</div>
+          <div style="font-size:12px;line-height:1.7;max-width:280px;margin:0 auto">Click + Add Appointment to track your medical visits, hearings, and consultations.</div>
         </div>
         <div class="disc">North Star is an informational and organizational tool only. It does not provide legal advice.</div>
       </div>
 
-      <!-- INCOME -->
-      <div class="sc" id="s-in">
+        <div class="sc" id="s-in">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:28px">
-          <div><div class="pt">Income &amp; Work <span>Activity Tracker</span></div><div style="font-size:13px;color:rgba(255,255,255,0.4)">Track all income &mdash; wages, Workers Comp, vacation payouts, unemployment, and more.</div></div>
+          <div><div class="pt">Income <span>Tracker</span></div><div style="font-size:13px;color:rgba(255,255,255,0.4)">Track monthly earnings to monitor your Substantial Gainful Activity (SGA) status. The 2024 SGA threshold is $1,550/month for non-blind individuals.</div></div>
           <button class="addb">+ Log Income</button>
         </div>
-        <div style="background:rgba(80,200,80,0.05);border:1px solid rgba(80,200,80,0.18);border-radius:10px;padding:14px 20px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between">
-          <div><div style="font-size:13px;font-weight:600;color:#60d060;margin-bottom:3px">Current Month: No Earned Income Logged</div><div style="font-size:12px;color:rgba(255,255,255,0.4)">Below the SGA threshold of $1,550/month for 2024.</div></div>
-          <div style="text-align:right"><div style="font-size:26px;font-weight:700;color:#60d060">$0</div><div style="font-size:10px;color:rgba(255,255,255,0.3)">This month earned</div></div>
-        </div>
         <div class="g4">
-          <div class="st"><div class="st-n">3</div><div class="st-l">TWP Months Used</div></div>
-          <div class="st"><div class="st-n">4</div><div class="st-l">Income Entries</div></div>
-          <div class="st" style="border-color:rgba(240,192,64,0.2)"><div class="st-n" style="color:#f0c040">1</div><div class="st-l">Docs Needed</div></div>
-          <div class="st"><div class="st-n">Open</div><div class="st-l">Workers Comp</div></div>
+          <div class="st"><div class="st-n">$0</div><div class="st-l">This Month</div></div>
+          <div class="st"><div class="st-n">$1,550</div><div class="st-l">SGA Threshold 2024</div></div>
+          <div class="st"><div class="st-n">$0</div><div class="st-l">YTD Total</div></div>
+          <div class="st" style="border-color:rgba(80,200,80,0.2)"><div class="st-n" style="color:#60d060">Under</div><div class="st-l">SGA Status</div></div>
         </div>
+        <div class="ib"><strong>&#9733; What is SGA?</strong>Substantial Gainful Activity is the monthly earnings threshold SSA uses at Step 1. Earning above SGA while a claim is pending results in denial. In 2024 the threshold is $1,550/month for non-blind individuals. SSA adjusts this annually.</div>
         <div class="sl">Income Log</div>
-        <div class="rw" style="border-left:3px solid #e05050"><div style="font-size:18px">&#128188;</div><div style="flex:1"><div class="rw-n">Wages &mdash; Walmart (part-time)</div><div class="rw-s">March 2024</div></div><div style="font-size:16px;font-weight:700;color:#ff7070;margin-right:10px">$820</div><div class="bx re">Counts toward SGA</div></div>
-        <div class="rw" style="border-left:3px solid #50c050"><div style="font-size:18px">&#127958;</div><div style="flex:1"><div class="rw-n">Accrued Vacation Payout</div><div class="rw-s">January 2024</div></div><div style="font-size:16px;font-weight:700;color:#60d060;margin-right:10px">$2,400</div><div class="bx gr">Does not count as SGA</div></div>
-        <div class="rw" style="border-left:3px solid #f0c040"><div style="font-size:18px">&#128203;</div><div style="flex:1"><div class="rw-n">Unemployment Benefits</div><div class="rw-s">February 2024</div></div><div style="font-size:16px;font-weight:700;color:#f0c040;margin-right:10px">$1,320</div><div class="bx go">Explain to SSA</div></div>
-        <div class="rw" style="border-left:3px solid #50c050"><div style="font-size:18px">&#128196;</div><div style="flex:1"><div class="rw-n">Long-Term Disability (Unum)</div><div class="rw-s">April 2024</div></div><div style="font-size:16px;font-weight:700;color:#60d060;margin-right:10px">$1,800</div><div class="bx gr">Does not count as SGA</div></div>
-        <div class="disc">SGA limits are updated annually by SSA. Always verify current amounts at ssa.gov. North Star does not provide legal or financial advice.</div>
+        <div style="text-align:center;padding:48px 24px;color:rgba(255,255,255,.25)">
+          <div style="font-size:36px;margin-bottom:14px;color:rgba(240,192,64,.2)">&#128176;</div>
+          <div style="font-family:Georgia,serif;font-size:16px;font-weight:300;margin-bottom:8px;color:rgba(255,255,255,.35)">No income logged yet</div>
+          <div style="font-size:12px;line-height:1.7;max-width:280px;margin:0 auto">Click + Log Income to track monthly earnings and monitor your SGA status.</div>
+        </div>
+        <div class="disc">North Star is an informational and organizational tool only. It does not provide legal advice. Consult your attorney or advocate regarding how income affects your specific claim.</div>
       </div>
 
-      <!-- RFC FORMS -->
-      <div class="sc" id="s-rf">
+    <div class="sc" id="s-rf">
         <div class="two-panel">
           <div class="left-panel w280">
             <div class="lp-hdr"><h2>RFC <span>Forms Library</span></h2><p>29 RFC forms for doctors to complete. Click any form to view details.</p></div>
@@ -443,25 +431,26 @@
       </div>
 
       <!-- SSA FORMS -->
-          <div class="sc" id="s-ev">
+              <div class="sc" id="s-ev">
         <div class="pt">Medical <span>Evidence Tracker</span></div>
         <div class="pd">Track all treating sources, which records have been requested and received, and any gaps in the medical record.</div>
         <div class="g4">
-          <div class="st"><div class="st-n">7</div><div class="st-l">Providers on File</div></div>
-          <div class="st" style="border-color:rgba(80,200,80,0.2)"><div class="st-n" style="color:#60d060">5</div><div class="st-l">Records Received</div></div>
-          <div class="st" style="border-color:rgba(240,192,64,0.2)"><div class="st-n" style="color:#f0c040">2</div><div class="st-l">Records Pending</div></div>
-          <div class="st"><div class="st-n">4</div><div class="st-l">RFC Forms Collected</div></div>
+          <div class="st"><div class="st-n">0</div><div class="st-l">Providers on File</div></div>
+          <div class="st" style="border-color:rgba(80,200,80,0.2)"><div class="st-n" style="color:#60d060">0</div><div class="st-l">Records Received</div></div>
+          <div class="st" style="border-color:rgba(240,192,64,0.2)"><div class="st-n" style="color:#f0c040">0</div><div class="st-l">Records Pending</div></div>
+          <div class="st"><div class="st-n">0</div><div class="st-l">RFC Forms Collected</div></div>
         </div>
         <div class="sl">Treating Sources</div>
-        <div class="pr"><div class="pav">&#129514;</div><div style="flex:1"><div style="font-size:13px;font-weight:600;margin-bottom:2px">Dr. Sarah Patel</div><div style="font-size:11px;color:rgba(255,255,255,0.4)">Pain Management</div></div><div class="bx gr">Records Received</div></div>
-        <div class="pr"><div class="pav">&#129504;</div><div style="flex:1"><div style="font-size:13px;font-weight:600;margin-bottom:2px">Dr. James Okonkwo</div><div style="font-size:11px;color:rgba(255,255,255,0.4)">Psychiatry</div></div><div class="bx gr">Records Received</div></div>
-        <div class="pr"><div class="pav">&#129460;</div><div style="flex:1"><div style="font-size:13px;font-weight:600;margin-bottom:2px">Your Treating Physician</div><div style="font-size:11px;color:rgba(255,255,255,0.4)">Orthopedic Surgery</div></div><div class="bx go">Records Pending</div></div>
-        <div class="pr"><div class="pav">&#127973;</div><div style="flex:1"><div style="font-size:13px;font-weight:600;margin-bottom:2px">Jacksonville Memorial Hospital</div><div style="font-size:11px;color:rgba(255,255,255,0.4)">Hospital Records</div></div><div class="bx gr">Records Received</div></div>
+        <div style="text-align:center;padding:48px 24px;color:rgba(255,255,255,.25)">
+          <div style="font-size:36px;margin-bottom:14px;color:rgba(240,192,64,.2)">&#127973;</div>
+          <div style="font-family:Georgia,serif;font-size:16px;font-weight:300;margin-bottom:8px;color:rgba(255,255,255,.35)">No providers added yet</div>
+          <div style="font-size:12px;line-height:1.7;max-width:280px;margin:0 auto">Add your treating physicians, specialists, and other medical sources to track your evidence file.</div>
+        </div>
+        <div class="ib"><strong>&#9733; What SSA Needs</strong>SSA requests records from all treating sources you list on the application using the SSA-827 authorization. Keep track of every provider and whether their records have been received into your file.</div>
         <div class="disc">North Star is an informational and organizational tool only. It does not provide legal advice.</div>
       </div>
 
-      <!-- ALJ -->
-      <div class="sc" id="s-aj">
+    <div class="sc" id="s-aj">
       <div style="max-width:860px">
 
         <div class="pt">My <span>ALJ</span></div>

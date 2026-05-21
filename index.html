@@ -326,7 +326,6 @@
               <div style="font-size:11px;line-height:1.6;max-width:220px;margin:0 auto">Go to Deadlines in the sidebar to track your important dates.</div>
             </div>
             
-            <div class="rw" style="border-left:3px solid #50c050;margin-bottom:20px">
             <div class="sl">Quick Access</div>
             <div class="g2" style="margin-bottom:0">
               <div class="cd" style="padding:14px" onclick="go('rf',document.querySelector('[onclick*=rf]'))"><div class="cd-ic" style="font-size:18px">&#128193;</div><div class="cd-t" style="font-size:12px">RFC Forms</div><div class="cd-a" style="font-size:10px;margin-top:6px">Open &#8594;</div></div>
@@ -396,16 +395,41 @@
 
         <div class="sc" id="s-in">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:28px">
-          <div><div class="pt">Income <span>Tracker</span></div><div style="font-size:13px;color:rgba(255,255,255,0.4)">Track monthly earnings to monitor your Substantial Gainful Activity (SGA) status. The 2024 SGA threshold is $1,550/month for non-blind individuals.</div></div>
+          <div><div class="pt">Income <span>Tracker</span></div><div style="font-size:13px;color:rgba(255,255,255,0.4)">Track monthly earnings to monitor your Substantial Gainful Activity (SGA) status. The 2026 SGA threshold is $1,690/month for non-blind individuals.</div></div>
           <button class="addb">+ Log Income</button>
         </div>
         <div class="g4">
           <div class="st"><div class="st-n">$0</div><div class="st-l">This Month</div></div>
-          <div class="st"><div class="st-n">$1,550</div><div class="st-l">SGA Threshold 2024</div></div>
+          <div class="st"><div class="st-n">$1,690</div><div class="st-l">SGA Threshold 2026</div></div>
           <div class="st"><div class="st-n">$0</div><div class="st-l">YTD Total</div></div>
           <div class="st" style="border-color:rgba(80,200,80,0.2)"><div class="st-n" style="color:#60d060">Under</div><div class="st-l">SGA Status</div></div>
         </div>
-        <div class="ib"><strong>&#9733; What is SGA?</strong>Substantial Gainful Activity is the monthly earnings threshold SSA uses at Step 1. Earning above SGA while a claim is pending results in denial. In 2024 the threshold is $1,550/month for non-blind individuals. SSA adjusts this annually.</div>
+        <div class="ib"><strong>&#9733; What is SGA?</strong>Substantial Gainful Activity is the monthly earnings threshold SSA uses at Step 1. Earning above SGA while a claim is pending results in denial. SSA adjusts this threshold every year.</div>
+
+        <!-- SGA Year Lookup -->
+        <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:20px 24px;margin-bottom:22px">
+          <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:14px">&#9733; SGA Threshold Lookup by Year</div>
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+            <input id="sgaYear" type="number" min="2000" max="2026" value="2026" placeholder="Year"
+              style="width:100px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:7px;padding:9px 14px;font-size:14px;color:#fff;outline:none;font-family:Arial,sans-serif"
+              onfocus="this.style.borderColor='rgba(240,192,64,.4)'" onblur="this.style.borderColor='rgba(255,255,255,.12)'"
+              oninput="lookupSGA(this.value)" />
+            <div style="font-size:12px;color:rgba(255,255,255,.35)">Enter any year 2000–2026</div>
+          </div>
+          <div id="sgaResult" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <div style="background:rgba(240,192,64,.06);border:1px solid rgba(240,192,64,.15);border-radius:8px;padding:14px 18px">
+              <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:6px">Non-Blind</div>
+              <div id="sgaNonBlind" style="font-size:22px;font-weight:300;color:#f0c040">$1,690/mo</div>
+              <div style="font-size:11px;color:rgba(255,255,255,.3);margin-top:4px">2026 threshold</div>
+            </div>
+            <div style="background:rgba(140,100,220,.06);border:1px solid rgba(140,100,220,.15);border-radius:8px;padding:14px 18px">
+              <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:6px">Blind</div>
+              <div id="sgaBlind" style="font-size:22px;font-weight:300;color:#c0a0f0">$2,830/mo</div>
+              <div style="font-size:11px;color:rgba(255,255,255,.3);margin-top:4px">2026 threshold</div>
+            </div>
+          </div>
+          <div style="font-size:11px;color:rgba(255,255,255,.2);margin-top:12px;line-height:1.6">Source: SSA Red Book. Thresholds are based on official SSA published figures. If you have an attorney or advocate, share this with them.</div>
+        </div>
         <div class="sl">Income Log</div>
         <div style="text-align:center;padding:48px 24px;color:rgba(255,255,255,.25)">
           <div style="font-size:36px;margin-bottom:14px;color:rgba(240,192,64,.2)">&#128176;</div>
@@ -415,7 +439,7 @@
         <div class="disc">North Star is an informational and organizational tool only. It does not provide legal advice. Consult your attorney or advocate regarding how income affects your specific claim.</div>
       </div>
 
-    <div class="sc" id="s-rf">
+    <div class="sc" id="s-rf" style="padding:0">
         <div class="two-panel">
           <div class="left-panel w280">
             <div class="lp-hdr"><h2>RFC <span>Forms Library</span></h2><p>29 RFC forms for doctors to complete. Click any form to view details.</p></div>
@@ -572,7 +596,7 @@
         </div></div>
 
       <!-- GLOSSARY -->
-    <div class="sc" id="s-gl">
+    <div class="sc" id="s-gl" style="padding:0">
       <div class="two-panel">
         <div class="left-panel w260">
           <div class="lp-hdr"><h2>Plain English <span>Glossary</span></h2><p>100 SSA terms explained clearly. No legal jargon.</p></div>
@@ -585,7 +609,7 @@
       </div>
     </div>
       <!-- BLUE BOOK -->
-    <div class="sc" id="s-bb">
+    <div class="sc" id="s-bb" style="padding:0">
       <div class="two-panel">
         <div class="left-panel w280">
           <div class="lp-hdr"><h2>Blue Book <span>Reference</span></h2><p>SSA Listing of Impairments in plain English.</p></div>
@@ -598,7 +622,7 @@
       </div>
     </div>
     <!-- RULINGS -->
-    <div class="sc" id="s-ru">
+    <div class="sc" id="s-ru" style="padding:0">
       <div class="two-panel">
         <div class="left-panel w280">
           <div class="lp-hdr"><h2>SSA <span>Rulings</span></h2><p>Key Social Security Rulings. Binding on all ALJs.</p></div>
@@ -611,7 +635,7 @@
       </div>
     </div>
     <!-- FAQs -->
-    <div class="sc" id="s-fq">
+    <div class="sc" id="s-fq" style="padding:0">
       <div class="two-panel">
         <div class="left-panel w260">
           <div class="lp-hdr"><h2>Frequently Asked <span>Questions</span></h2><p>Common questions answered in plain English.</p></div>
@@ -623,7 +647,7 @@
       </div>
     </div>
     <!-- SSA FORMS -->
-    <div class="sc" id="s-sf">
+    <div class="sc" id="s-sf" style="padding:0">
       <div class="two-panel">
         <div class="left-panel w280">
           <div class="lp-hdr"><h2>SSA <span>Official Forms</span></h2><p>Official forms linking directly to ssa.gov.</p></div>
@@ -762,7 +786,7 @@
       </div>
     </div>
     <!-- HEARING OFFICES -->
-    <div class="sc" id="s-ho">
+    <div class="sc" id="s-ho" style="padding:0">
       <div class="two-panel">
         <div class="left-panel w280">
           <div class="lp-hdr"><h2>Hearing <span>Offices</span></h2><p>SSA hearing offices by state. Find contact information for the office handling your case.</p></div>
@@ -813,7 +837,7 @@ var faqs = [
       },
       {
         q: 'Can I work while applying for disability?',
-        a: 'Earning above the Substantial Gainful Activity threshold while an application is pending results in denial at Step 1 of the evaluation. In 2024 the SGA threshold is $1,550 per month for non-blind individuals. Part-time work below that threshold does not automatically disqualify a claim, but SSA considers all work activity in the evaluation. Attempted work that failed due to the disabling condition is relevant evidence. If you are currently receiving SSDI benefits, the Trial Work Period allows up to 9 months of work above a lower threshold without immediately affecting benefits.'
+        a: 'Earning above the Substantial Gainful Activity threshold while an application is pending results in denial at Step 1 of the evaluation. In 2024 the SGA threshold is $1,690 per month for non-blind individuals. Part-time work below that threshold does not automatically disqualify a claim, but SSA considers all work activity in the evaluation. Attempted work that failed due to the disabling condition is relevant evidence. If you are currently receiving SSDI benefits, the Trial Work Period allows up to 9 months of work above a lower threshold without immediately affecting benefits.'
       },
       {
         q: 'What information do I need to have ready when I apply?',
@@ -949,7 +973,7 @@ var faqs = [
       },
       {
         q: 'What is Substantial Gainful Activity (SGA) and how does it affect my claim?',
-        a: 'Substantial Gainful Activity is the monthly earnings threshold SSA uses at Step 1 to determine whether a claimant is working. In 2024 the SGA threshold is $1,550 per month for non-blind individuals and $2,590 for blind individuals. Earnings above SGA result in denial at Step 1 before SSA reviews any medical evidence. The SGA threshold adjusts annually. Earnings below SGA do not automatically disqualify a claim, but SSA considers all work activity in the evaluation. Unearned income such as investment income, rental income, and most government benefits does not count toward SGA.'
+        a: 'Substantial Gainful Activity is the monthly earnings threshold SSA uses at Step 1 to determine whether a claimant is working. In 2024 the SGA threshold is $1,690 per month for non-blind individuals and $2,890 for blind individuals. Earnings above SGA result in denial at Step 1 before SSA reviews any medical evidence. The SGA threshold adjusts annually. Earnings below SGA do not automatically disqualify a claim, but SSA considers all work activity in the evaluation. Unearned income such as investment income, rental income, and most government benefits does not count toward SGA.'
       },
       {
         q: 'What is the Trial Work Period?',
@@ -1238,7 +1262,7 @@ var T=[
 {t:"SSDI",a:"Social Security Disability Insurance",p:"Disability benefits based on work history and Social Security taxes paid during employment.",d:"A federal insurance program. Benefits are based on lifetime earnings. Insured status requires sufficient recent work credits. SSDI recipients receive Medicare after 24 months. There is no asset or resource limit for SSDI eligibility.",s:"All Stages",ty:"Program",r:["SSI","Work Credits","Medicare"]},
 {t:"SSI",a:"Supplemental Security Income",p:"Disability benefits based on financial need - no work history required.",d:"A needs-based program funded by general revenues. Eligibility requires meeting the disability standard and having limited income and resources. In 2024 the resource limit is $2,000 for individuals. SSI recipients are generally eligible for Medicaid. The 2024 federal benefit rate is $943 per month for individuals.",s:"All Stages",ty:"Program",r:["SSDI","Medicaid","Concurrent Benefits"]},
 {t:"Subjective Symptoms",a:"",p:"Pain, fatigue, and other symptoms reported by the claimant that cannot be directly measured by objective testing.",d:"SSA evaluates subjective symptoms under SSR 16-3p. The symptom must be traceable to an MDI, then its intensity, persistence, and limiting effects are assessed across seven factors. Subjective symptoms are part of the overall record SSA must consider.",s:"All Stages",ty:"Medical / Legal Term",r:["Credibility","SSR 16-3p","Function Report"]},
-{t:"Substantial Gainful Activity",a:"SGA",p:"The monthly earnings threshold - earning above it results in denial at Step 1 regardless of medical condition.",d:"In 2024 the SGA threshold is $1,550 per month for non-blind individuals and $2,590 for blind individuals. SSA adjusts SGA annually. Unearned income generally does not count toward SGA. Subsidies and impairment-related work expenses may reduce countable earnings.",s:"Step 1",ty:"Financial Threshold",r:["Sequential Evaluation","Trial Work Period"]},
+{t:"Substantial Gainful Activity",a:"SGA",p:"The monthly earnings threshold - earning above it results in denial at Step 1 regardless of medical condition.",d:"In 2024 the SGA threshold is $1,690 per month for non-blind individuals and $2,890 for blind individuals. SSA adjusts SGA annually. Unearned income generally does not count toward SGA. Subsidies and impairment-related work expenses may reduce countable earnings.",s:"Step 1",ty:"Financial Threshold",r:["Sequential Evaluation","Trial Work Period"]},
 {t:"Ticket to Work",a:"",p:"SSA's free voluntary program providing employment services to disability beneficiaries who want to return to work.",d:"Assigns a ticket to SSDI and SSI recipients that can be used to obtain services from approved Employment Networks or State Vocational Rehabilitation agencies. Participating provides certain protections against CDRs while the ticket is in use.",s:"Work Incentives",ty:"SSA Program",r:["Trial Work Period","Extended Period of Eligibility"]},
 {t:"Treating Source Opinion",a:"TSO",p:"A medical opinion from a physician with an ongoing treatment relationship with the claimant.",d:"Under current regulations (claims filed after March 27 2017), treating source opinions are evaluated for persuasiveness - not automatically given controlling weight. Well-documented opinions with specific functional parameters from long-treating sources remain important evidence.",s:"Medical Evidence",ty:"Evidence Type",r:["Medical Source Statement","Persuasiveness","RFC Form"]},
 {t:"Trial Work Period",a:"TWP",p:"A 9-month period during which SSDI recipients can test returning to work without losing benefits.",d:"Any month with earnings above $1,110 in 2024 counts as a TWP month. The 9 months need not be consecutive - counted within a rolling 60-month window. Benefits continue throughout the TWP. After all 9 months are used, SSA evaluates SGA.",s:"Work Incentives",ty:"Work Incentive",r:["Substantial Gainful Activity","Extended Period of Eligibility"]},
@@ -2797,6 +2821,11 @@ function clearRepInfo() {
   window.repData = {};
   document.getElementById('repSaveMsg').style.display = 'none';
 }
+
+
+// ── SGA LOOKUP ─────────────────────────────────────────────────────────
+var sgaData={2000:{nb:700,bl:1170},2001:{nb:740,bl:1240},2002:{nb:780,bl:1300},2003:{nb:800,bl:1330},2004:{nb:810,bl:1350},2005:{nb:830,bl:1380},2006:{nb:860,bl:1450},2007:{nb:900,bl:1500},2008:{nb:940,bl:1570},2009:{nb:980,bl:1640},2010:{nb:1000,bl:1640},2011:{nb:1000,bl:1640},2012:{nb:1010,bl:1690},2013:{nb:1040,bl:1740},2014:{nb:1070,bl:1800},2015:{nb:1090,bl:1820},2016:{nb:1130,bl:1820},2017:{nb:1170,bl:1950},2018:{nb:1180,bl:1970},2019:{nb:1220,bl:2040},2020:{nb:1260,bl:2110},2021:{nb:1310,bl:2190},2022:{nb:1350,bl:2260},2023:{nb:1470,bl:2460},2024:{nb:1550,bl:2590},2025:{nb:1620,bl:2700},2026:{nb:1690,bl:2830}};
+function lookupSGA(yr){var year=parseInt(yr);var d=sgaData[year];var nb=document.getElementById('sgaNonBlind');var bl=document.getElementById('sgaBlind');if(!nb||!bl)return;if(!d){nb.textContent='N/A';bl.textContent='N/A';return;}nb.textContent='$'+d.nb.toLocaleString()+'/mo';nb.nextElementSibling.textContent=year+' threshold';bl.textContent='$'+d.bl.toLocaleString()+'/mo';bl.nextElementSibling.textContent=year+' threshold';}
 
 </script>
 </body>

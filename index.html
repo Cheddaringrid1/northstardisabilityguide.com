@@ -262,6 +262,7 @@
       <div class="ni" onclick="go('ev',this)"><span class="ni-ic">🏥</span><span class="ni-lb">Medical Evidence</span></div>
       <div class="nav-sec">My Hearing</div>
       <div class="ni" onclick="go('aj',this)"><span class="ni-ic">⚖️</span><span class="ni-lb">My ALJ</span></div>
+      <div class="ni" onclick="go('hp',this)"><span class="ni-ic">📋</span><span class="ni-lb">Hearing Prep</span></div>
       <div class="nav-sec">Communication</div>
       <div class="ni" onclick="go('cl',this)"><span class="ni-ic">📨</span><span class="ni-lb">Communication Log</span></div>
       <div class="ni" onclick="go('rp',this)"><span class="ni-ic">🤝</span><span class="ni-lb">My Representative</span></div>
@@ -289,6 +290,57 @@
         <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:28px">
           <div><div class="pt">Welcome to North Star &#9733;</div><div style="font-size:13px;color:rgba(255,255,255,0.4)">Your Social Security Disability Guide</div></div>
         </div>
+        <!-- CLAIM TYPE SELECTOR -->
+        <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:18px 22px;margin-bottom:22px">
+          <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:14px">&#9733; My Claim Type</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px" id="claimTypeGrid">
+            <div class="ct-btn" onclick="setClaimType(this,'SSDI')" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:12px 16px;cursor:pointer;transition:all .2s">
+              <div style="font-size:13px;font-weight:600;color:rgba(255,255,255,.8);margin-bottom:3px">SSDI / Title II</div>
+              <div style="font-size:11px;color:rgba(255,255,255,.35)">Social Security Disability Insurance</div>
+            </div>
+            <div class="ct-btn" onclick="setClaimType(this,'SSI')" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:12px 16px;cursor:pointer;transition:all .2s">
+              <div style="font-size:13px;font-weight:600;color:rgba(255,255,255,.8);margin-bottom:3px">SSI / Title XVI</div>
+              <div style="font-size:11px;color:rgba(255,255,255,.35)">Supplemental Security Income</div>
+            </div>
+            <div class="ct-btn" onclick="setClaimType(this,'Concurrent')" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:12px 16px;cursor:pointer;transition:all .2s">
+              <div style="font-size:13px;font-weight:600;color:rgba(255,255,255,.8);margin-bottom:3px">Concurrent</div>
+              <div style="font-size:11px;color:rgba(255,255,255,.35)">Both SSDI and SSI</div>
+            </div>
+            <div class="ct-btn" onclick="setClaimType(this,'Child SSI')" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:12px 16px;cursor:pointer;transition:all .2s">
+              <div style="font-size:13px;font-weight:600;color:rgba(255,255,255,.8);margin-bottom:3px">Child SSI</div>
+              <div style="font-size:11px;color:rgba(255,255,255,.35)">Under age 18</div>
+            </div>
+            <div class="ct-btn" onclick="setClaimType(this,'Disabled Widow/Widower')" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:12px 16px;cursor:pointer;transition:all .2s">
+              <div style="font-size:13px;font-weight:600;color:rgba(255,255,255,.8);margin-bottom:3px">Disabled Widow/Widower</div>
+              <div style="font-size:11px;color:rgba(255,255,255,.35)">Based on spouse's record</div>
+            </div>
+            <div class="ct-btn" onclick="setClaimType(this,'DAC')" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:12px 16px;cursor:pointer;transition:all .2s">
+              <div style="font-size:13px;font-weight:600;color:rgba(255,255,255,.8);margin-bottom:3px">DAC</div>
+              <div style="font-size:11px;color:rgba(255,255,255,.35)">Disabled Adult Child</div>
+            </div>
+            <div class="ct-btn" onclick="setClaimType(this,'Not Sure')" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:12px 16px;cursor:pointer;transition:all .2s">
+              <div style="font-size:13px;font-weight:600;color:rgba(255,255,255,.8);margin-bottom:3px">Not Sure</div>
+              <div style="font-size:11px;color:rgba(255,255,255,.35)">Your representative can clarify</div>
+            </div>
+          </div>
+          <div id="claimTypeNote" style="display:none;margin-top:14px;padding:12px 16px;background:rgba(240,192,64,.06);border:1px solid rgba(240,192,64,.15);border-radius:8px;font-size:12px;color:rgba(255,255,255,.5);line-height:1.7"></div>
+          <div style="font-size:10px;color:rgba(255,255,255,.2);margin-top:12px;line-height:1.6">Claim type affects SGA rules, income limits, back pay, and benefit programs. If you are unsure which applies, your representative can clarify. This selection is for your reference only.</div>
+        </div>
+
+        <div class="sl">Your Claim</div>
+        <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:16px 20px;margin-bottom:20px">
+          <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:12px">&#9733; Claim Type</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px">
+            <div class="ct-pill" onclick="setClaimType(this,'SSDI')" style="cursor:pointer;padding:7px 14px;border-radius:20px;font-size:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.5);transition:all .2s">SSDI / Title II</div>
+            <div class="ct-pill" onclick="setClaimType(this,'SSI')" style="cursor:pointer;padding:7px 14px;border-radius:20px;font-size:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.5);transition:all .2s">SSI / Title XVI</div>
+            <div class="ct-pill" onclick="setClaimType(this,'Concurrent')" style="cursor:pointer;padding:7px 14px;border-radius:20px;font-size:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.5);transition:all .2s">Concurrent SSDI + SSI</div>
+            <div class="ct-pill" onclick="setClaimType(this,'Child SSI')" style="cursor:pointer;padding:7px 14px;border-radius:20px;font-size:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.5);transition:all .2s">Child SSI</div>
+            <div class="ct-pill" onclick="setClaimType(this,'Widow/Widower')" style="cursor:pointer;padding:7px 14px;border-radius:20px;font-size:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.5);transition:all .2s">Disabled Widow/Widower</div>
+            <div class="ct-pill" onclick="setClaimType(this,'DAC')" style="cursor:pointer;padding:7px 14px;border-radius:20px;font-size:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.5);transition:all .2s">DAC / Adult Disabled Child</div>
+            <div class="ct-pill" onclick="setClaimType(this,'Unknown')" style="cursor:pointer;padding:7px 14px;border-radius:20px;font-size:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.5);transition:all .2s">Not Sure</div>
+          </div>
+          <div id="ctNote" style="font-size:11px;color:rgba(255,255,255,.3);line-height:1.7;min-height:16px"></div>
+        </div>
         <div class="sl">Your Journey</div>
         <div class="rm">
           <div class="rs"><div class="rd">1</div><div class="rn">Applied</div></div>
@@ -297,7 +349,8 @@
           <div class="rs"><div class="rd">4</div><div class="rn">ALJ Hearing</div></div>
           <div class="rs"><div class="rd">5</div><div class="rn">Decision</div></div>
           <div class="rs"><div class="rd">6</div><div class="rn">Appeals Council</div></div>
-          <div class="rs"><div class="rd">7</div><div class="rn">Approved</div></div>&#9733;</div><div class="rn">Approved</div></div>
+          <div class="rs"><div class="rd">7</div><div class="rn">Approved</div></div>
+          <div class="rn">Approved</div></div>
         </div>
         <div class="g4">
           <div class="st"><div class="st-n">—</div><div class="st-l">Days to Hearing</div></div>
@@ -326,7 +379,7 @@
             <div style="text-align:center;padding:32px 16px;color:rgba(255,255,255,.25)">
               <div style="font-size:28px;margin-bottom:10px;color:rgba(240,192,64,.2)">&#9200;</div>
               <div style="font-size:13px;color:rgba(255,255,255,.35);margin-bottom:6px">No deadlines added yet</div>
-              <div style="font-size:11px;line-height:1.6;max-width:220px;margin:0 auto">Go to Deadlines in the sidebar to track your important dates.</div>
+              <div style="font-size:11px;line-height:1.6;max-width:240px;margin:0 auto">SSA appeal windows are fixed. Missing one may affect your claim, though SSA may grant an extension for good cause. Go to Deadlines to track every window.</div>
             </div>
             
             <div class="sl">Quick Access</div>
@@ -346,11 +399,11 @@
         <div class="pt">My <span>Roadmap</span></div>
         <div class="pd">The complete Social Security disability process — where you are, what came before, and what comes next.</div>
         <div class="spr"><div class="sdw"><div class="sd td">1</div><div class="sl2 td"></div></div><div class="sb2"><div class="st2 td">Initial Application</div><div class="sd2">The SSA-16 and SSA-3368 are filed. DDS begins reviewing medical evidence. Average processing time: 3&ndash;6 months.</div></div></div>
-        <div class="spr"><div class="sdw"><div class="sd td">2</div><div class="sl2 td"></div></div><div class="sb2"><div class="st2 td">Initial Decision</div><div class="sd2">DDS issues a written determination. Most initial claims receive a denial. The appeal window is 65 days from the notice date.</div></div></div>
+        <div class="spr"><div class="sdw"><div class="sd td">2</div><div class="sl2 td"></div></div><div class="sb2"><div class="st2 td">Initial Decision</div><div class="sd2">DDS issues a written determination. Most initial claims receive a denial. SSA generally allows 60 days from the date you receive the notice to appeal. SSA presumes receipt within 5 days of the notice date unless you can show otherwise — most people treat this as approximately 65 days from the notice date. Always verify your exact deadline with SSA or your representative.</div></div></div>
         <div class="spr"><div class="sdw"><div class="sd td">3</div><div class="sl2 td"></div></div><div class="sb2"><div class="st2 td">Reconsideration</div><div class="sd2">A different DDS examiner reviews the file with any new evidence. Most reconsiderations also result in denial.</div></div></div>
         <div class="spr"><div class="sdw"><div class="sd td">4</div><div class="sl2 td"></div></div><div class="sb2"><div class="st2 td">ALJ Hearing</div><div class="sd2">An independent Administrative Law Judge reviews the complete file and hears testimony. Published SSA data shows higher approval rates at this level than at prior levels.</div></div></div>
         <div class="spr"><div class="sdw"><div class="sd td">5</div><div class="sl2 td"></div></div><div class="sb2"><div class="st2 td">ALJ Decision</div><div class="sd2">The ALJ issues a fully favorable, partially favorable, or unfavorable written decision explaining the findings and the basis for the determination.</div></div></div>
-        <div class="spr"><div class="sdw"><div class="sd td">6</div><div class="sl2 td"></div></div><div class="sb2"><div class="st2 td">Appeals Council</div><div class="sd2">If unfavorable, the claimant may request Appeals Council review within 65 days. The AC reviews for legal error and does not hold hearings.</div></div></div>
+        <div class="spr"><div class="sdw"><div class="sd td">6</div><div class="sl2 td"></div></div><div class="sb2"><div class="st2 td">Appeals Council</div><div class="sd2">If unfavorable, the claimant may request Appeals Council review within 65 days of the decision notice (60 days from receipt plus 5 days presumed mail time). Verify the exact deadline. The AC reviews for legal error and does not hold hearings.</div></div></div>
         <div class="spr"><div class="sdw"><div class="sd td">7</div></div><div class="sb2"><div class="st2 td">Federal Court</div><div class="sd2">If the AC denies review or upholds the decision, the claimant may file in federal district court. Completing the AC level is required before federal court.</div></div></div>
         <div class="disc">Process timelines are estimates based on published SSA data and vary by hearing office and region.</div>
       </div>
@@ -358,7 +411,7 @@
       <!-- DEADLINES -->
           <div class="sc" id="s-dl">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:28px">
-          <div><div class="pt">Deadline <span>Tracker</span></div><div style="font-size:13px;color:rgba(255,255,255,0.4)">SSA appeal deadlines are fixed. Track every window, hearing date, and response deadline.</div></div>
+          <div><div class="pt">Deadline <span>Tracker</span></div><div style="font-size:13px;color:rgba(255,255,255,0.4)">SSA appeal deadlines are important to track. While SSA may grant extensions for good cause — such as illness, hospitalization, or other circumstances — tracking every window, hearing date, and response deadline helps protect your claim.</div></div>
           <button class="addb">+ Add Deadline</button>
         </div>
         <div class="g4">
@@ -371,7 +424,7 @@
         <div style="text-align:center;padding:48px 24px;color:rgba(255,255,255,.25)">
           <div style="font-size:36px;margin-bottom:14px;color:rgba(240,192,64,.2)">&#9200;</div>
           <div style="font-family:Georgia,serif;font-size:16px;font-weight:300;margin-bottom:8px;color:rgba(255,255,255,.35)">No deadlines added yet</div>
-          <div style="font-size:12px;line-height:1.7;max-width:280px;margin:0 auto">Click + Add Deadline to start tracking your SSA appeal deadlines, hearing dates, and response windows.</div>
+          <div style="font-size:12px;line-height:1.7;max-width:320px;margin:0 auto">SSA appeal windows are important — missing one may affect your claim, though SSA may grant a deadline extension for good cause in certain circumstances including illness, hospitalization, mental health conditions, low literacy, or other factors beyond your control. Your attorney or advocate can advise whether good cause applies to your situation. Add your deadlines here so nothing is overlooked.</div>
         </div>
         <div class="disc">North Star is an informational and organizational tool only. It does not provide legal advice. Always verify deadlines with SSA directly or with your attorney or advocate.</div>
       </div>
@@ -391,7 +444,7 @@
         <div style="text-align:center;padding:48px 24px;color:rgba(255,255,255,.25)">
           <div style="font-size:36px;margin-bottom:14px;color:rgba(240,192,64,.2)">&#128197;</div>
           <div style="font-family:Georgia,serif;font-size:16px;font-weight:300;margin-bottom:8px;color:rgba(255,255,255,.35)">No appointments added yet</div>
-          <div style="font-size:12px;line-height:1.7;max-width:280px;margin:0 auto">Click + Add Appointment to track your medical visits, hearings, and consultations.</div>
+          <div style="font-size:12px;line-height:1.7;max-width:320px;margin:0 auto">Tracking your medical appointments creates a record of ongoing treatment — consistent care with treating physicians is an important part of building your medical evidence file. Add hearings, consultations, and follow-up visits here.</div>
         </div>
         <div class="disc">North Star is an informational and organizational tool only. It does not provide legal advice.</div>
       </div>
@@ -407,7 +460,7 @@
           <div class="st"><div class="st-n">$0</div><div class="st-l">YTD Total</div></div>
           <div class="st" style="border-color:rgba(80,200,80,0.2)"><div class="st-n" style="color:#60d060">Under</div><div class="st-l">SGA Status</div></div>
         </div>
-        <div class="ib"><strong>&#9733; What is SGA?</strong>Substantial Gainful Activity is the monthly earnings threshold SSA uses at Step 1. Earning above SGA while a claim is pending results in denial. SSA adjusts this threshold every year.</div>
+        <div class="ib"><strong>&#9733; What is SGA?</strong>Substantial Gainful Activity is the monthly earnings threshold SSA uses at Step 1. If SSA determines you are performing SGA, your claim may be denied at Step 1. The SGA analysis can involve additional rules including averaging, impairment-related work expenses, and unsuccessful work attempt provisions. Discuss any work activity with SSA or your representative. SSA adjusts this threshold every year.</div>
 
         <!-- SGA Year Lookup -->
         <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:20px 24px;margin-bottom:22px">
@@ -437,7 +490,7 @@
         <div style="text-align:center;padding:48px 24px;color:rgba(255,255,255,.25)">
           <div style="font-size:36px;margin-bottom:14px;color:rgba(240,192,64,.2)">&#128176;</div>
           <div style="font-family:Georgia,serif;font-size:16px;font-weight:300;margin-bottom:8px;color:rgba(255,255,255,.35)">No income logged yet</div>
-          <div style="font-size:12px;line-height:1.7;max-width:280px;margin:0 auto">Click + Log Income to track monthly earnings and monitor your SGA status.</div>
+          <div style="font-size:12px;line-height:1.7;max-width:320px;margin:0 auto">If you are working or have worked during your claim, tracking earnings helps you and your representative understand how work activity may be evaluated under SSA's SGA rules. Different rules may apply depending on your claim type, work history, and circumstances. Use the lookup tool above to find the threshold for any year.</div>
         </div>
         <div class="disc">North Star is an informational and organizational tool only. It does not provide legal advice. Consult your attorney or advocate regarding how income affects your specific claim.</div>
       </div>
@@ -458,22 +511,126 @@
       </div>
 
       <!-- SSA FORMS -->
-              <div class="sc" id="s-ev">
+                  <div class="sc" id="s-ev">
         <div class="pt">Medical <span>Evidence Tracker</span></div>
-        <div class="pd">Track all treating sources, which records have been requested and received, and any gaps in the medical record.</div>
+        <div class="pd">Track all treating sources, record request status, and evidence gaps. Your representative needs a complete picture of what records exist and where they stand.</div>
         <div class="g4">
           <div class="st"><div class="st-n">0</div><div class="st-l">Providers on File</div></div>
           <div class="st" style="border-color:rgba(80,200,80,0.2)"><div class="st-n" style="color:#60d060">0</div><div class="st-l">Records Received</div></div>
           <div class="st" style="border-color:rgba(240,192,64,0.2)"><div class="st-n" style="color:#f0c040">0</div><div class="st-l">Records Pending</div></div>
           <div class="st"><div class="st-n">0</div><div class="st-l">RFC Forms Collected</div></div>
         </div>
-        <div class="sl">Treating Sources</div>
-        <div style="text-align:center;padding:48px 24px;color:rgba(255,255,255,.25)">
-          <div style="font-size:36px;margin-bottom:14px;color:rgba(240,192,64,.2)">&#127973;</div>
-          <div style="font-family:Georgia,serif;font-size:16px;font-weight:300;margin-bottom:8px;color:rgba(255,255,255,.35)">No providers added yet</div>
-          <div style="font-size:12px;line-height:1.7;max-width:280px;margin:0 auto">Add your treating physicians, specialists, and other medical sources to track your evidence file.</div>
+
+        <!-- Add Provider Form -->
+        <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:20px 24px;margin-bottom:20px">
+          <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:16px">&#9733; Add Treating Source</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
+            <div><div style="font-size:11px;color:rgba(255,255,255,.4);margin-bottom:6px">Provider Name</div>
+            <input type="text" id="evName" placeholder="Dr. / Clinic / Hospital name" style="width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:7px;padding:9px 14px;font-size:13px;color:#fff;outline:none" onfocus="this.style.borderColor='rgba(240,192,64,.4)'" onblur="this.style.borderColor='rgba(255,255,255,.12)'" /></div>
+            <div><div style="font-size:11px;color:rgba(255,255,255,.4);margin-bottom:6px">Specialty / Type</div>
+            <input type="text" id="evType" placeholder="e.g. Primary Care, Psychiatrist" style="width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:7px;padding:9px 14px;font-size:13px;color:#fff;outline:none" onfocus="this.style.borderColor='rgba(240,192,64,.4)'" onblur="this.style.borderColor='rgba(255,255,255,.12)'" /></div>
+            <div><div style="font-size:11px;color:rgba(255,255,255,.4);margin-bottom:6px">Date Records Requested</div>
+            <input type="date" id="evReqDate" style="width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:7px;padding:9px 14px;font-size:13px;color:#fff;outline:none;color-scheme:dark" onfocus="this.style.borderColor='rgba(240,192,64,.4)'" onblur="this.style.borderColor='rgba(255,255,255,.12)'" /></div>
+            <div><div style="font-size:11px;color:rgba(255,255,255,.4);margin-bottom:6px">Date Records Received</div>
+            <input type="date" id="evRecDate" style="width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:7px;padding:9px 14px;font-size:13px;color:#fff;outline:none;color-scheme:dark" onfocus="this.style.borderColor='rgba(240,192,64,.4)'" onblur="this.style.borderColor='rgba(255,255,255,.12)'" /></div>
+            <div><div style="font-size:11px;color:rgba(255,255,255,.4);margin-bottom:6px">Records Sent to SSA?</div>
+            <select id="evSentSSA" style="width:100%;background:rgba(20,28,50,.98);border:1px solid rgba(255,255,255,.12);border-radius:7px;padding:9px 14px;font-size:13px;color:#fff;outline:none" onfocus="this.style.borderColor='rgba(240,192,64,.4)'" onblur="this.style.borderColor='rgba(255,255,255,.12)'">
+              <option value="">Select...</option>
+              <option>Yes — confirmed in file</option>
+              <option>Yes — sent, not confirmed</option>
+              <option>No — not yet sent</option>
+              <option>Unknown</option>
+            </select></div>
+            <div><div style="font-size:11px;color:rgba(255,255,255,.4);margin-bottom:6px">RFC Form Status</div>
+            <select id="evRFC" style="width:100%;background:rgba(20,28,50,.98);border:1px solid rgba(255,255,255,.12);border-radius:7px;padding:9px 14px;font-size:13px;color:#fff;outline:none" onfocus="this.style.borderColor='rgba(240,192,64,.4)'" onblur="this.style.borderColor='rgba(255,255,255,.12)'">
+              <option value="">Select...</option>
+              <option>Not requested yet</option>
+              <option>Requested — awaiting response</option>
+              <option>Provider agreed — not yet returned</option>
+              <option>Completed and received</option>
+              <option>Provider declined</option>
+            </select></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
+            <div><div style="font-size:11px;color:rgba(255,255,255,.4);margin-bottom:6px">Missing Date Range</div>
+            <input type="text" id="evGap" placeholder="e.g. Jan 2022 – Jun 2022" style="width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:7px;padding:9px 14px;font-size:13px;color:#fff;outline:none" onfocus="this.style.borderColor='rgba(240,192,64,.4)'" onblur="this.style.borderColor='rgba(255,255,255,.12)'" /></div>
+            <div><div style="font-size:11px;color:rgba(255,255,255,.4);margin-bottom:6px">Updated Records Needed Before Hearing?</div>
+            <select id="evUpdate" style="width:100%;background:rgba(20,28,50,.98);border:1px solid rgba(255,255,255,.12);border-radius:7px;padding:9px 14px;font-size:13px;color:#fff;outline:none" onfocus="this.style.borderColor='rgba(240,192,64,.4)'" onblur="this.style.borderColor='rgba(255,255,255,.12)'">
+              <option value="">Select...</option>
+              <option>Yes — in progress</option>
+              <option>Yes — not yet requested</option>
+              <option>No — records are current</option>
+              <option>Unknown</option>
+            </select></div>
+          </div>
+          <div><div style="font-size:11px;color:rgba(255,255,255,.4);margin-bottom:6px">Notes</div>
+          <textarea id="evNotes" placeholder="Any notes about this provider or their records..." rows="2" style="width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:7px;padding:9px 14px;font-size:13px;color:#fff;outline:none;resize:vertical;font-family:Arial,sans-serif" onfocus="this.style.borderColor='rgba(240,192,64,.4)'" onblur="this.style.borderColor='rgba(255,255,255,.12)'"></textarea></div>
+          <div style="margin-top:14px">
+            <button onclick="addEvProvider()" style="background:linear-gradient(135deg,#f0c040,#e0a820);color:#0a0e1a;border:none;padding:10px 26px;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;border-radius:6px;cursor:pointer">Add Provider</button>
+          </div>
         </div>
-        <div class="ib"><strong>&#9733; What SSA Needs</strong>SSA requests records from all treating sources you list on the application using the SSA-827 authorization. Keep track of every provider and whether their records have been received into your file.</div>
+
+        <!-- Provider List -->
+        <div class="sl">Treating Sources on File</div>
+        <div id="evProviderList">
+          <div style="text-align:center;padding:40px 24px;color:rgba(255,255,255,.25)">
+            <div style="font-size:32px;margin-bottom:12px;color:rgba(240,192,64,.2)">&#127973;</div>
+            <div style="font-family:Georgia,serif;font-size:15px;font-weight:300;margin-bottom:8px;color:rgba(255,255,255,.35)">No providers added yet</div>
+            <div style="font-size:12px;line-height:1.75;max-width:340px;margin:0 auto;color:rgba(255,255,255,.3)">SSA requests records from all treating sources listed on your application using the SSA-827. Keeping track of every provider — and the status of their records — helps you and your representative identify gaps before they become problems at the hearing.</div>
+          </div>
+        </div>
+
+        
+        <div class="g4">
+          <div class="st"><div class="st-n" id="evProvCount">0</div><div class="st-l">Providers on File</div></div>
+          <div class="st" style="border-color:rgba(80,200,80,0.2)"><div class="st-n" style="color:#60d060" id="evRecCount">0</div><div class="st-l">Records Received</div></div>
+          <div class="st" style="border-color:rgba(240,192,64,0.2)"><div class="st-n" style="color:#f0c040" id="evPendCount">0</div><div class="st-l">Records Pending</div></div>
+          <div class="st"><div class="st-n" id="evRFCCount">0</div><div class="st-l">RFC Forms Collected</div></div>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+          <div class="sl" style="margin-bottom:0">Treating Sources</div>
+          <button class="addb" onclick="addEvProvider()">+ Add Provider</button>
+        </div>
+
+        <div id="evProviderList">
+          <div style="text-align:center;padding:40px 24px;color:rgba(255,255,255,.25)">
+            <div style="font-size:32px;margin-bottom:12px;color:rgba(240,192,64,.2)">&#127973;</div>
+            <div style="font-family:Georgia,serif;font-size:15px;font-weight:300;margin-bottom:8px;color:rgba(255,255,255,.35)">No providers added yet</div>
+            <div style="font-size:12px;line-height:1.7;max-width:320px;margin:0 auto">SSA requests records from every treating source listed on your application. Tracking what has been requested, what has been received, and what may be missing helps you and your representative stay on top of the evidence file. Add every doctor, specialist, therapist, or clinic involved in your care.</div>
+          </div>
+        </div>
+
+        <!-- Add Provider Form (hidden by default) -->
+        <div id="evAddForm" style="display:none;background:rgba(255,255,255,.03);border:1px solid rgba(240,192,64,.2);border-radius:10px;padding:20px 24px;margin-top:16px">
+          <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#f0c040;margin-bottom:16px">Add Treating Source</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+            <div><div style="font-size:11px;color:rgba(255,255,255,.4);margin-bottom:5px">Provider Name</div>
+            <input id="evName" type="text" placeholder="Dr. / Clinic name" style="width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:8px 12px;font-size:13px;color:#fff;outline:none" /></div>
+            <div><div style="font-size:11px;color:rgba(255,255,255,.4);margin-bottom:5px">Specialty / Type</div>
+            <input id="evSpec" type="text" placeholder="e.g. Primary Care, Psychiatry" style="width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:8px 12px;font-size:13px;color:#fff;outline:none" /></div>
+            <div><div style="font-size:11px;color:rgba(255,255,255,.4);margin-bottom:5px">Date Records Requested</div>
+            <input id="evReqDate" type="date" style="width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:8px 12px;font-size:13px;color:#fff;outline:none;color-scheme:dark" /></div>
+            <div><div style="font-size:11px;color:rgba(255,255,255,.4);margin-bottom:5px">Date Records Received</div>
+            <input id="evRecDate" type="date" style="width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:8px 12px;font-size:13px;color:#fff;outline:none;color-scheme:dark" /></div>
+            <div><div style="font-size:11px;color:rgba(255,255,255,.4);margin-bottom:5px">Records Sent to SSA?</div>
+            <select id="evSentSSA" style="width:100%;background:rgba(20,28,50,.98);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:8px 12px;font-size:13px;color:#fff;outline:none">
+              <option value="">Unknown</option><option>Yes</option><option>No</option><option>In progress</option>
+            </select></div>
+            <div><div style="font-size:11px;color:rgba(255,255,255,.4);margin-bottom:5px">RFC Form Status</div>
+            <select id="evRFC" style="width:100%;background:rgba(20,28,50,.98);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:8px 12px;font-size:13px;color:#fff;outline:none">
+              <option value="">Not requested</option><option>Requested — pending</option><option>Completed — received</option><option>Doctor declined</option>
+            </select></div>
+          </div>
+          <div style="margin-bottom:12px"><div style="font-size:11px;color:rgba(255,255,255,.4);margin-bottom:5px">Missing Date Range / Notes</div>
+          <input id="evNotes" type="text" placeholder="e.g. Need records from Jan 2023 — present" style="width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:8px 12px;font-size:13px;color:#fff;outline:none" /></div>
+          <div style="display:flex;gap:10px">
+            <button onclick="saveEvProvider()" style="background:linear-gradient(135deg,#f0c040,#e0a820);color:#0a0e1a;border:none;padding:9px 22px;font-size:12px;font-weight:700;border-radius:6px;cursor:pointer">Save Provider</button>
+            <button onclick="document.getElementById('evAddForm').style.display='none'" style="background:rgba(255,255,255,.05);color:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.1);padding:9px 18px;font-size:12px;border-radius:6px;cursor:pointer">Cancel</button>
+          </div>
+        </div>
+
+        <div class="ib" style="margin-top:16px"><strong>&#9733; SSA-827 Authorization</strong>SSA uses Form SSA-827 to request records from treating sources. Your representative can advise on which sources to list and whether any records should be obtained independently before the hearing.</div>
         <div class="disc">North Star is an informational and organizational tool only. It does not provide legal advice.</div>
       </div>
 
@@ -529,7 +686,7 @@
         <!-- SSA stats link -->
         <div style="background:rgba(240,192,64,.05);border:1px solid rgba(240,192,64,.18);border-radius:10px;padding:20px 24px;margin-bottom:22px">
           <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#f0c040;margin-bottom:12px">&#9733; Look Up Your Judge's Public Decision Statistics</div>
-          <div style="font-size:13px;color:rgba(255,255,255,.6);line-height:1.85;margin-bottom:16px">SSA publishes approval and denial rates for every ALJ nationwide. These are public records. You can look up your assigned judge by name to see their historical approval rate, average processing time, and decision breakdown. Approval rates vary significantly from judge to judge — some approve the majority of cases while others approve far fewer. This information does not predict the outcome of your case, but it is useful context to share with your attorney or advocate.</div>
+          <div style="font-size:13px;color:rgba(255,255,255,.6);line-height:1.85;margin-bottom:16px">SSA publishes approval and denial rates for every ALJ nationwide. These are public records. You can look up your assigned judge by name to see their historical approval rate, average processing time, and decision breakdown. Approval rates vary significantly from judge to judge — approval rates vary significantly from judge to judge. This information does not predict the outcome of your case. Do not assume a low approval rate means your case cannot be won, or that a high approval rate means your case will be approved. Share this information with your attorney or advocate — they can interpret it in the context of your specific case.</div>
           <a href="https://www.ssa.gov/appeals/DataSets/Appeals_Remand_Final_DT.html" target="_blank" rel="noopener"
             style="display:inline-block;background:rgba(240,192,64,.12);border:1px solid rgba(240,192,64,.35);border-radius:6px;padding:10px 20px;font-size:12px;color:#f0c040;text-decoration:none;font-weight:600;margin-right:10px">
             &#128269; SSA ALJ Decision Statistics &#8594;
@@ -579,7 +736,70 @@
 
       
 
-      <!-- COMMUNICATION LOG -->
+  
+    <!-- HEARING PREP -->
+    <div class="sc" id="s-hp">
+      <div style="max-width:860px">
+        <div class="pt">Hearing <span>Prep Checklist</span></div>
+        <div class="pd">A checklist to help you and your representative prepare for your ALJ hearing. Share this with your attorney or advocate — they will guide you on each item.</div>
+
+        <div class="ib"><strong>&#9733; Important</strong>Your representative is the right person to direct hearing preparation. This checklist is an organizational tool — not legal advice and not a substitute for guidance from your attorney or advocate.</div>
+
+        <!-- Hearing Details -->
+        <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:20px 24px;margin-bottom:20px">
+          <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:16px">&#9733; Hearing Details</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+            <div><div style="font-size:11px;color:rgba(255,255,255,.4);margin-bottom:6px">Hearing Date</div>
+            <input type="date" id="hpDate" style="width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:7px;padding:9px 14px;font-size:13px;color:#fff;outline:none;color-scheme:dark" onfocus="this.style.borderColor='rgba(240,192,64,.4)'" onblur="this.style.borderColor='rgba(255,255,255,.12)'" /></div>
+            <div><div style="font-size:11px;color:rgba(255,255,255,.4);margin-bottom:6px">Hearing Format</div>
+            <select id="hpFormat" style="width:100%;background:rgba(20,28,50,.98);border:1px solid rgba(255,255,255,.12);border-radius:7px;padding:9px 14px;font-size:13px;color:#fff;outline:none" onfocus="this.style.borderColor='rgba(240,192,64,.4)'" onblur="this.style.borderColor='rgba(255,255,255,.12)'">
+              <option value="">Select...</option>
+              <option>Video hearing</option><option>In-person hearing</option><option>Telephone hearing</option>
+            </select></div>
+            <div><div style="font-size:11px;color:rgba(255,255,255,.4);margin-bottom:6px">ALJ Name</div>
+            <input type="text" id="hpALJ" placeholder="From hearing notice" style="width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:7px;padding:9px 14px;font-size:13px;color:#fff;outline:none" onfocus="this.style.borderColor='rgba(240,192,64,.4)'" onblur="this.style.borderColor='rgba(255,255,255,.12)'" /></div>
+            <div><div style="font-size:11px;color:rgba(255,255,255,.4);margin-bottom:6px">Hearing Office</div>
+            <input type="text" id="hpOffice" placeholder="City, State" style="width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:7px;padding:9px 14px;font-size:13px;color:#fff;outline:none" onfocus="this.style.borderColor='rgba(240,192,64,.4)'" onblur="this.style.borderColor='rgba(255,255,255,.12)'" /></div>
+          </div>
+        </div>
+
+        <!-- Evidence Checklist -->
+        <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:20px 24px;margin-bottom:20px">
+          <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:16px">&#9733; Evidence Preparation</div>
+          <div id="hpEvidenceList"></div>
+        </div>
+
+        <!-- Representative Checklist -->
+        <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:20px 24px;margin-bottom:20px">
+          <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:16px">&#9733; Representative Coordination</div>
+          <div id="hpRepList"></div>
+        </div>
+
+        <!-- Logistics Checklist -->
+        <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:20px 24px;margin-bottom:20px">
+          <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:16px">&#9733; Logistics</div>
+          <div id="hpLogList"></div>
+        </div>
+
+        <!-- Progress -->
+        <div style="background:rgba(240,192,64,.05);border:1px solid rgba(240,192,64,.15);border-radius:10px;padding:16px 22px;margin-bottom:20px;display:flex;align-items:center;gap:16px">
+          <div style="flex:1">
+            <div style="font-size:11px;color:rgba(255,255,255,.4);margin-bottom:6px">Checklist Progress</div>
+            <div style="background:rgba(255,255,255,.08);border-radius:4px;height:8px;overflow:hidden">
+              <div id="hpProgressBar" style="background:linear-gradient(90deg,#f0c040,#e0a820);height:100%;width:0%;transition:width .3s"></div>
+            </div>
+          </div>
+          <div style="text-align:center">
+            <div id="hpProgressText" style="font-size:20px;font-weight:300;color:#f0c040">0%</div>
+            <div style="font-size:10px;color:rgba(255,255,255,.3)">Complete</div>
+          </div>
+        </div>
+
+        <div class="disc">This checklist is an informational and organizational tool only. It does not constitute legal advice. Your attorney or advocate directs hearing preparation — share this with them.</div>
+      </div>
+    </div>
+
+    <!-- COMMUNICATION LOG -->
           <div class="sc" id="s-cl">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:28px">
           <div><div class="pt">Communication <span>Log</span></div><div style="font-size:13px;color:rgba(255,255,255,0.4)">Every interaction documented &mdash; what was sent, received, discussed, and what follow-up is needed.</div></div>
@@ -595,7 +815,7 @@
         <div style="text-align:center;padding:48px 24px;color:rgba(255,255,255,.25)">
           <div style="font-size:36px;margin-bottom:14px;color:rgba(240,192,64,.2)">&#128232;</div>
           <div style="font-family:Georgia,serif;font-size:16px;font-weight:300;margin-bottom:8px;color:rgba(255,255,255,.35)">No communications logged yet</div>
-          <div style="font-size:12px;line-height:1.7;max-width:280px;margin:0 auto">Use the Log Communication button to track every interaction with SSA, your attorney, and your doctors.</div>
+          <div style="font-size:12px;line-height:1.7;max-width:320px;margin:0 auto">Disability cases can span years and involve dozens of interactions with SSA, representatives, doctors, and other agencies. A dated log of every call, letter, and notice creates a record you and your representative can reference at any point in the process.</div>
         </div></div>
 
       <!-- GLOSSARY -->
@@ -679,11 +899,11 @@
           <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
             <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:14px 16px">
               <div style="font-size:13px;font-weight:600;color:rgba(255,255,255,.8);margin-bottom:6px">Contingency Fee</div>
-              <div style="font-size:12px;color:rgba(255,255,255,.45);line-height:1.7">Disability attorneys are paid only if you win. No upfront cost. The fee comes from back pay only.</div>
+              <div style="font-size:12px;color:rgba(255,255,255,.45);line-height:1.7">Many disability representatives work on a contingency basis — no fee unless you are awarded benefits. Under the common SSA fee agreement process, the fee is generally limited to the lesser of 25% of past-due benefits or SSA's current maximum dollar cap. Some agreements may also address case expenses separately. Always review your fee agreement carefully.</div>
             </div>
             <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:14px 16px">
               <div style="font-size:13px;font-weight:600;color:rgba(255,255,255,.8);margin-bottom:6px">SSA Fee Cap</div>
-              <div style="font-size:12px;color:rgba(255,255,255,.45);line-height:1.7">SSA caps the fee at 25% of past-due benefits up to a maximum set annually. SSA pays the attorney directly from the back pay award.</div>
+              <div style="font-size:12px;color:rgba(255,255,255,.45);line-height:1.7">Under the SSA fee agreement process, the fee is generally capped at 25% of past-due benefits or SSA's current annual maximum, whichever is less. SSA pays the representative directly from the back pay award.</div>
             </div>
             <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:14px 16px">
               <div style="font-size:13px;font-weight:600;color:rgba(255,255,255,.8);margin-bottom:6px">Any Stage</div>
@@ -803,6 +1023,7 @@
         </div>
 
     </div>
+    </div>
   </div>
 </div>
 
@@ -832,7 +1053,7 @@ var faqs = [
       },
       {
         q: 'Do I need an attorney or advocate to apply?',
-        a: 'Representation is not required at any stage. However, SSA data consistently shows that claimants represented by attorneys or non-attorney advocates have higher approval rates, particularly at the ALJ hearing level. Disability attorneys typically work on contingency - meaning they are paid only if you win, and only from back pay. SSA caps the fee at 25% of back pay up to a maximum set annually. Non-attorney advocates operate under the same fee structure. You may obtain representation at any stage of the process.'
+        a: 'Representation is not required at any stage. However, SSA data consistently shows that claimants represented by attorneys or non-attorney advocates have higher approval rates, particularly at the ALJ hearing level. Disability attorneys typically work on contingency - meaning no fee is owed unless you are awarded benefits. Under the SSA fee agreement process, fees are generally limited to the lesser of 25% of past-due benefits or SSA\'s current annual maximum. Some agreements may address case expenses separately. Non-attorney advocates operate under the same fee structure. You may obtain representation at any stage of the process.'
       },
       {
         q: 'What medical conditions qualify for disability?',
@@ -840,7 +1061,7 @@ var faqs = [
       },
       {
         q: 'Can I work while applying for disability?',
-        a: 'Earning above the Substantial Gainful Activity threshold while an application is pending results in denial at Step 1 of the evaluation. In 2024 the SGA threshold is $1,690 per month for non-blind individuals. Part-time work below that threshold does not automatically disqualify a claim, but SSA considers all work activity in the evaluation. Attempted work that failed due to the disabling condition is relevant evidence. If you are currently receiving SSDI benefits, the Trial Work Period allows up to 9 months of work above a lower threshold without immediately affecting benefits.'
+        a: 'Earning above the Substantial Gainful Activity threshold while an application is pending may result in denial at Step 1. The SGA analysis can involve additional rules including averaging, impairment-related work expenses, and unsuccessful work attempt provisions. Discuss any work activity with SSA or your representative. In 2026 the SGA threshold is $1,690 per month for non-blind individuals and $2,830 per month for blind individuals. Part-time work below that threshold does not automatically disqualify a claim, but SSA considers all work activity in the evaluation. Attempted work that failed due to the disabling condition is relevant evidence. If you are currently receiving SSDI benefits, the Trial Work Period allows up to 9 months of work above a lower threshold without immediately affecting benefits.'
       },
       {
         q: 'What information do I need to have ready when I apply?',
@@ -916,7 +1137,7 @@ var faqs = [
       },
       {
         q: 'What is the Appeals Council and when should I request review?',
-        a: 'The Appeals Council is the fourth level of the SSA appeals process. After an unfavorable ALJ decision, the claimant may request Appeals Council review within 65 days. The AC reviews the written record for legal error - it does not hold hearings or hear new testimony. The AC denies most requests for review, which means it found no basis to disturb the ALJ\'s decision. Completing the AC level is generally required before filing in federal district court. An attorney can evaluate whether specific legal errors in the ALJ decision warrant AC review.'
+        a: 'The Appeals Council is the fourth level of the SSA appeals process. After an unfavorable ALJ decision, the claimant may request Appeals Council review within 65 days of the decision notice (60 days from receipt plus 5 days presumed mail time). Verify the exact deadline. The AC reviews the written record for legal error - it does not hold hearings or hear new testimony. The AC denies most requests for review, which means it found no basis to disturb the ALJ\'s decision. Completing the AC level is generally required before filing in federal district court. An attorney can evaluate whether specific legal errors in the ALJ decision warrant AC review.'
       }
     ]
   },
@@ -976,7 +1197,7 @@ var faqs = [
       },
       {
         q: 'What is Substantial Gainful Activity (SGA) and how does it affect my claim?',
-        a: 'Substantial Gainful Activity is the monthly earnings threshold SSA uses at Step 1 to determine whether a claimant is working. In 2024 the SGA threshold is $1,690 per month for non-blind individuals and $2,890 for blind individuals. Earnings above SGA result in denial at Step 1 before SSA reviews any medical evidence. The SGA threshold adjusts annually. Earnings below SGA do not automatically disqualify a claim, but SSA considers all work activity in the evaluation. Unearned income such as investment income, rental income, and most government benefits does not count toward SGA.'
+        a: 'Substantial Gainful Activity is the monthly earnings threshold SSA uses at Step 1 to determine whether a claimant is working. In 2026 the SGA threshold is $1,690 per month for non-blind individuals and $2,830 for blind individuals. If SSA finds you are performing SGA, your claim may be denied at Step 1 before SSA reviews any medical evidence. The SGA threshold adjusts annually. Earnings below SGA do not automatically disqualify a claim, but SSA considers all work activity in the evaluation. Unearned income such as investment income, rental income, and most government benefits does not count toward SGA.'
       },
       {
         q: 'What is the Trial Work Period?',
@@ -1265,7 +1486,7 @@ var T=[
 {t:"SSDI",a:"Social Security Disability Insurance",p:"Disability benefits based on work history and Social Security taxes paid during employment.",d:"A federal insurance program. Benefits are based on lifetime earnings. Insured status requires sufficient recent work credits. SSDI recipients receive Medicare after 24 months. There is no asset or resource limit for SSDI eligibility.",s:"All Stages",ty:"Program",r:["SSI","Work Credits","Medicare"]},
 {t:"SSI",a:"Supplemental Security Income",p:"Disability benefits based on financial need - no work history required.",d:"A needs-based program funded by general revenues. Eligibility requires meeting the disability standard and having limited income and resources. In 2024 the resource limit is $2,000 for individuals. SSI recipients are generally eligible for Medicaid. The 2024 federal benefit rate is $943 per month for individuals.",s:"All Stages",ty:"Program",r:["SSDI","Medicaid","Concurrent Benefits"]},
 {t:"Subjective Symptoms",a:"",p:"Pain, fatigue, and other symptoms reported by the claimant that cannot be directly measured by objective testing.",d:"SSA evaluates subjective symptoms under SSR 16-3p. The symptom must be traceable to an MDI, then its intensity, persistence, and limiting effects are assessed across seven factors. Subjective symptoms are part of the overall record SSA must consider.",s:"All Stages",ty:"Medical / Legal Term",r:["Credibility","SSR 16-3p","Function Report"]},
-{t:"Substantial Gainful Activity",a:"SGA",p:"The monthly earnings threshold - earning above it results in denial at Step 1 regardless of medical condition.",d:"In 2024 the SGA threshold is $1,690 per month for non-blind individuals and $2,890 for blind individuals. SSA adjusts SGA annually. Unearned income generally does not count toward SGA. Subsidies and impairment-related work expenses may reduce countable earnings.",s:"Step 1",ty:"Financial Threshold",r:["Sequential Evaluation","Trial Work Period"]},
+{t:"Substantial Gainful Activity",a:"SGA",p:"The monthly earnings threshold SSA uses at Step 1. If SSA finds you are performing SGA, your claim may be denied at Step 1. Additional rules may apply including averaging and impairment-related work expense deductions.",d:"In 2026 the SGA threshold is $1,690 per month for non-blind individuals and $2,830 for blind individuals. SSA adjusts SGA annually. Unearned income generally does not count toward SGA. Subsidies and impairment-related work expenses may reduce countable earnings.",s:"Step 1",ty:"Financial Threshold",r:["Sequential Evaluation","Trial Work Period"]},
 {t:"Ticket to Work",a:"",p:"SSA's free voluntary program providing employment services to disability beneficiaries who want to return to work.",d:"Assigns a ticket to SSDI and SSI recipients that can be used to obtain services from approved Employment Networks or State Vocational Rehabilitation agencies. Participating provides certain protections against CDRs while the ticket is in use.",s:"Work Incentives",ty:"SSA Program",r:["Trial Work Period","Extended Period of Eligibility"]},
 {t:"Treating Source Opinion",a:"TSO",p:"A medical opinion from a physician with an ongoing treatment relationship with the claimant.",d:"Under current regulations (claims filed after March 27 2017), treating source opinions are evaluated for persuasiveness - not automatically given controlling weight. Well-documented opinions with specific functional parameters from long-treating sources remain important evidence.",s:"Medical Evidence",ty:"Evidence Type",r:["Medical Source Statement","Persuasiveness","RFC Form"]},
 {t:"Trial Work Period",a:"TWP",p:"A 9-month period during which SSDI recipients can test returning to work without losing benefits.",d:"Any month with earnings above $1,110 in 2024 counts as a TWP month. The 9 months need not be consecutive - counted within a rolling 60-month window. Benefits continue throughout the TWP. After all 9 months are used, SSA evaluates SGA.",s:"Work Incentives",ty:"Work Incentive",r:["Substantial Gainful Activity","Extended Period of Eligibility"]},
@@ -2099,6 +2320,7 @@ window.ssaFormsData=forms;
 
 // ── Navigation (defined before any onclick fires) ───────────────────────
 var SCRNAMES = {
+  hp:'Hearing Prep',
   ho:'Hearing Offices',
   db:'Dashboard', rm:'My Roadmap', dl:'Deadlines', ap:'Appointments',
   'in':'Income Tracker', rf:'RFC Forms Library', sf:'SSA Official Forms',
@@ -2117,6 +2339,7 @@ function go(id, el) {
   document.getElementById('bc').textContent = SCRNAMES[id] || id;
   if (id === 'rf') { renderRFPills(); renderRFList(); }
   if (id === 'ho' && !hoInit) initHO();
+  if (id === 'hp' && !hpInited) initHP();
   if (id === 'gl' && !glInit) initGL();
   if (id === 'bb' && !bbInit) initBB();
   if (id === 'ru' && !ruInit) initRU();
@@ -2829,6 +3052,265 @@ function clearRepInfo() {
 // ── SGA LOOKUP ─────────────────────────────────────────────────────────
 var sgaData={2000:{nb:700,bl:1170},2001:{nb:740,bl:1240},2002:{nb:780,bl:1300},2003:{nb:800,bl:1330},2004:{nb:810,bl:1350},2005:{nb:830,bl:1380},2006:{nb:860,bl:1450},2007:{nb:900,bl:1500},2008:{nb:940,bl:1570},2009:{nb:980,bl:1640},2010:{nb:1000,bl:1640},2011:{nb:1000,bl:1640},2012:{nb:1010,bl:1690},2013:{nb:1040,bl:1740},2014:{nb:1070,bl:1800},2015:{nb:1090,bl:1820},2016:{nb:1130,bl:1820},2017:{nb:1170,bl:1950},2018:{nb:1180,bl:1970},2019:{nb:1220,bl:2040},2020:{nb:1260,bl:2110},2021:{nb:1310,bl:2190},2022:{nb:1350,bl:2260},2023:{nb:1470,bl:2460},2024:{nb:1550,bl:2590},2025:{nb:1620,bl:2700},2026:{nb:1690,bl:2830}};
 function lookupSGA(yr){var year=parseInt(yr);var d=sgaData[year];var nb=document.getElementById('sgaNonBlind');var bl=document.getElementById('sgaBlind');if(!nb||!bl)return;if(!d){nb.textContent='N/A';bl.textContent='N/A';return;}nb.textContent='$'+d.nb.toLocaleString()+'/mo';nb.nextElementSibling.textContent=year+' threshold';bl.textContent='$'+d.bl.toLocaleString()+'/mo';bl.nextElementSibling.textContent=year+' threshold';}
+
+
+// ── CLAIM TYPE SELECTOR ───────────────────────────────────────────────────
+var claimTypeNotes = {
+  "SSDI": "SSDI is based on your work history and Social Security earnings record. Eligibility depends on insured status (work credits). Back pay can go up to 12 months before the application date. Medicare eligibility begins 24 months after entitlement.",
+  "SSI": "SSI is based on financial need — income and resource limits apply regardless of work history. The SGA rules differ. Back pay begins the month after the application date. Medicaid eligibility typically begins with SSI approval.",
+  "Concurrent": "Concurrent claims involve both SSDI and SSI. SSI fills the gap when the SSDI benefit is below the SSI federal benefit rate. Income and resource rules from both programs apply. Your representative can explain how both interact.",
+  "Child SSI": "Child SSI uses a different disability standard than adult claims — the child must have a medically determinable impairment causing marked and severe functional limitations. Parental income and resources are considered (deeming rules apply).",
+  "Disabled Widow/Widower": "Disabled Widow/Widower benefits are based on a deceased spouse earnings record. The disability standard is different from standard adult disability. Age and timing requirements apply. Your representative can clarify eligibility.",
+  "DAC": "Disabled Adult Child benefits are paid on a parent Social Security record when the adult child became disabled before age 22. The DAC must meet the standard adult disability definition. Benefits continue as long as disability persists.",
+  "Not Sure": "Your representative or SSA can clarify which program or programs apply to your situation. The type of claim affects income rules, back pay, benefit programs, and how certain issues are evaluated."
+};
+
+function setClaimType(el, type) {
+  document.querySelectorAll('.ct-btn').forEach(function(b) {
+    b.style.background = 'rgba(255,255,255,.04)';
+    b.style.borderColor = 'rgba(255,255,255,.1)';
+  });
+  el.style.background = 'rgba(240,192,64,.08)';
+  el.style.borderColor = 'rgba(240,192,64,.4)';
+  window.selectedClaimType = type;
+  var note = document.getElementById('claimTypeNote');
+  if (note) {
+    note.style.display = 'block';
+    note.innerHTML = '<strong style="color:#f0c040">' + type + ':</strong> ' + (claimTypeNotes[type] || '');
+  }
+}
+
+// ── HEARING PREP CHECKLIST ────────────────────────────────────────────────
+var hpChecks = {
+  evidence: [
+    {id:'hp1', text:'Medical records updated through the most recent treatment date', note:'Discuss with your representative which date range is needed.'},
+    {id:'hp2', text:'RFC forms obtained from treating physicians', note:'Your representative will advise which doctors should complete RFC forms and which forms are appropriate.'},
+    {id:'hp3', text:'5-business-day evidence deadline noted', note:'SSA requires evidence to be submitted no later than 5 business days before the hearing, with limited exceptions. Verify the exact date with your representative.'},
+    {id:'hp4', text:'All evidence submitted or representative notified of outstanding records', note:''},
+    {id:'hp5', text:'Medication list current and complete', note:''},
+    {id:'hp6', text:'Work history reviewed and documented', note:''},
+    {id:'hp7', text:'Function report reviewed', note:''}
+  ],
+  rep: [
+    {id:'hp8', text:'Pre-hearing conference with representative scheduled', note:''},
+    {id:'hp9', text:'SSA-1696 on file confirming representation', note:''},
+    {id:'hp10', text:'Questions for representative prepared', note:''},
+    {id:'hp11', text:'Representative contact information confirmed', note:''},
+    {id:'hp12', text:'Witness arrangements discussed with representative (if applicable)', note:'Your representative advises whether a witness is appropriate for your hearing.'}
+  ],
+  logistics: [
+    {id:'hp13', text:'Transportation or technology setup confirmed for hearing format', note:'Video hearings require a working camera and internet connection. In-person hearings require transportation. Phone hearings require a reliable phone number.'},
+    {id:'hp14', text:'Time off work or childcare arranged if needed', note:''},
+    {id:'hp15', text:'ID documents available', note:''},
+    {id:'hp16', text:'Hearing notice reviewed and hearing details confirmed', note:''}
+  ]
+};
+
+var hpChecked = {};
+var hpInited = false;
+
+function initHP() {
+  hpInited = true;
+  renderHPList('hpEvidenceList', hpChecks.evidence);
+  renderHPList('hpRepList', hpChecks.rep);
+  renderHPList('hpLogList', hpChecks.logistics);
+  updateHPProgress();
+}
+
+function renderHPList(containerId, items) {
+  var el = document.getElementById(containerId);
+  if (!el) return;
+  var html = '';
+  for (var i = 0; i < items.length; i++) {
+    var item = items[i];
+    var checked = hpChecked[item.id] || false;
+    html += '<div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.05)">';
+    html += '<div data-hpid="' + item.id + '" onclick="toggleHP(this.dataset.hpid)" style="width:20px;height:20px;flex-shrink:0;border-radius:4px;border:1px solid ' + (checked ? '#60d060' : 'rgba(255,255,255,.2)') + ';background:' + (checked ? 'rgba(80,200,80,.15)' : 'transparent') + ';cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px;color:#60d060">' + (checked ? '&#10003;' : '') + '</div>';
+    html += '<div style="flex:1"><div style="font-size:13px;color:' + (checked ? 'rgba(255,255,255,.4)' : 'rgba(255,255,255,.8)') + ';text-decoration:' + (checked ? 'line-through' : 'none') + ';line-height:1.5">' + item.text + '</div>';
+    if (item.note) html += '<div style="font-size:11px;color:rgba(255,255,255,.3);margin-top:3px;line-height:1.5">' + item.note + '</div>';
+    html += '</div></div>';
+  }
+  el.innerHTML = html;
+}
+
+function toggleHP(id) {
+  hpChecked[id] = !hpChecked[id];
+  renderHPList('hpEvidenceList', hpChecks.evidence);
+  renderHPList('hpRepList', hpChecks.rep);
+  renderHPList('hpLogList', hpChecks.logistics);
+  updateHPProgress();
+}
+
+function updateHPProgress() {
+  var all = hpChecks.evidence.concat(hpChecks.rep).concat(hpChecks.logistics);
+  var done = all.filter(function(i){ return hpChecked[i.id]; }).length;
+  var pct = Math.round(done / all.length * 100);
+  var bar = document.getElementById('hpProgressBar');
+  var txt = document.getElementById('hpProgressText');
+  if (bar) bar.style.width = pct + '%';
+  if (txt) txt.textContent = pct + '%';
+}
+
+// ── EVIDENCE TRACKER ──────────────────────────────────────────────────────
+var evProviders = [];
+
+function addEvProvider() {
+  document.getElementById('evAddForm').style.display = 'block';
+  document.getElementById('evAddForm').scrollIntoView({behavior:'smooth'});
+}
+
+function saveEvProvider() {
+  var name = document.getElementById('evName').value.trim();
+  if (!name) { alert('Please enter a provider name.'); return; }
+  var prov = {
+    id: Date.now(),
+    name: name,
+    spec: document.getElementById('evSpec').value.trim(),
+    reqDate: document.getElementById('evReqDate').value,
+    recDate: document.getElementById('evRecDate').value,
+    sentSSA: document.getElementById('evSentSSA').value,
+    rfc: document.getElementById('evRFC').value,
+    notes: document.getElementById('evNotes').value.trim()
+  };
+  evProviders.push(prov);
+  ['evName','evSpec','evReqDate','evRecDate','evNotes'].forEach(function(id){ document.getElementById(id).value=''; });
+  document.getElementById('evSentSSA').value = '';
+  document.getElementById('evRFC').value = '';
+  document.getElementById('evAddForm').style.display = 'none';
+  renderEvProviders();
+}
+
+function removeEvProvider(id) {
+  evProviders = evProviders.filter(function(p){ return p.id !== id; });
+  renderEvProviders();
+}
+
+function renderEvProviders() {
+  var el = document.getElementById('evProviderList');
+  if (!el) return;
+  var received = evProviders.filter(function(p){ return p.recDate; }).length;
+  var pending = evProviders.filter(function(p){ return !p.recDate; }).length;
+  var rfcs = evProviders.filter(function(p){ return p.rfc === 'Completed — received'; }).length;
+  var pc = document.getElementById('evProvCount'); if(pc) pc.textContent = evProviders.length;
+  var rc = document.getElementById('evRecCount'); if(rc) rc.textContent = received;
+  var pnd = document.getElementById('evPendCount'); if(pnd) pnd.textContent = pending;
+  var rfc = document.getElementById('evRFCCount'); if(rfc) rfc.textContent = rfcs;
+
+  if (evProviders.length === 0) {
+    el.innerHTML = '<div style="text-align:center;padding:40px 24px;color:rgba(255,255,255,.25)"><div style="font-size:32px;margin-bottom:12px;color:rgba(240,192,64,.2)">&#127973;</div><div style="font-family:Georgia,serif;font-size:15px;font-weight:300;margin-bottom:8px;color:rgba(255,255,255,.35)">No providers added yet</div><div style="font-size:12px;line-height:1.7;max-width:320px;margin:0 auto">Add every doctor, specialist, therapist, or clinic involved in your care.</div></div>';
+    return;
+  }
+
+  var rfcColors = {'Completed — received':'#60d060','Requested — pending':'#f0c040','Doctor declined':'#ff7070','Not requested':'rgba(255,255,255,.3)',''  :'rgba(255,255,255,.3)'};
+  el.innerHTML = evProviders.map(function(p) {
+    return '<div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:14px 18px;margin-bottom:10px">' +
+      '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">' +
+      '<div><div style="font-size:14px;font-weight:600;color:rgba(255,255,255,.85)">' + p.name + '</div>' +
+      (p.spec ? '<div style="font-size:11px;color:rgba(255,255,255,.35);margin-top:2px">' + p.spec + '</div>' : '') + '</div>' +
+      '<button onclick="removeEvProvider(' + p.id + ')" style="background:none;border:none;color:rgba(255,100,100,.5);cursor:pointer;font-size:16px;padding:0">&#215;</button></div>' +
+      '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px;font-size:11px">' +
+      '<div><span style="color:rgba(255,255,255,.3)">Requested: </span><span style="color:rgba(255,255,255,.6)">' + (p.reqDate || '—') + '</span></div>' +
+      '<div><span style="color:rgba(255,255,255,.3)">Received: </span><span style="color:rgba(255,255,255,.6)">' + (p.recDate || '—') + '</span></div>' +
+      '<div><span style="color:rgba(255,255,255,.3)">Sent to SSA: </span><span style="color:rgba(255,255,255,.6)">' + (p.sentSSA || '—') + '</span></div>' +
+      '<div><span style="color:rgba(255,255,255,.3)">RFC: </span><span style="color:' + (rfcColors[p.rfc]||'rgba(255,255,255,.6)') + '">' + (p.rfc || '—') + '</span></div>' +
+      (p.notes ? '<div style="grid-column:1/-1"><span style="color:rgba(255,255,255,.3)">Notes: </span><span style="color:rgba(255,255,255,.5)">' + p.notes + '</span></div>' : '') +
+      '</div></div>';
+  }).join('');
+}
+
+
+
+// ── CLAIM TYPE ────────────────────────────────────────────────────────────
+var claimTypeNotes = {
+  'SSDI': 'SSDI (Title II) is based on your work history and Social Security credits. Insured status, back pay, and Medicare eligibility are key considerations specific to this program.',
+  'SSI': 'SSI (Title XVI) is needs-based and does not require a work history. Income, resources, and living arrangements affect eligibility. Medicaid is the associated health coverage.',
+  'Concurrent': 'Concurrent claims involve both SSDI and SSI. SSDI is primary — SSI may fill a gap if the SSDI benefit is low. Different rules apply to each program.',
+  'Child SSI': 'Child SSI uses a different medical standard — functional equivalence to a listed impairment. Parental income and resources are factored into the eligibility determination.',
+  'Widow/Widower': 'Disabled widow or widower benefits are based on the deceased spouse earnings record. The disability standard is different from standard adult disability. Age and timing requirements apply.',
+  'DAC': 'Disabled Adult Child benefits are paid on a parent earnings record. Disability must have begun before age 22. A separate medical determination is required.',
+  'Unknown': 'Not sure which type applies? Your representative or local SSA office can help identify which program or programs may cover your situation.'
+};
+
+function setClaimType(el, type) {
+  document.querySelectorAll('.ct-pill').forEach(function(p) {
+    p.style.background = 'rgba(255,255,255,.05)';
+    p.style.borderColor = 'rgba(255,255,255,.12)';
+    p.style.color = 'rgba(255,255,255,.5)';
+  });
+  el.style.background = 'rgba(240,192,64,.12)';
+  el.style.borderColor = 'rgba(240,192,64,.4)';
+  el.style.color = '#f0c040';
+  var note = document.getElementById('ctNote');
+  if (note) note.textContent = claimTypeNotes[type] || '';
+  window.selectedClaimType = type;
+}
+
+// ── EVIDENCE PROVIDER TRACKER ─────────────────────────────────────────────
+var evProviders = [];
+
+function addEvProvider() {
+  var name = document.getElementById('evName').value.trim();
+  if (!name) { alert('Please enter a provider name.'); return; }
+  var provider = {
+    id: Date.now(),
+    name: name,
+    type: document.getElementById('evType').value,
+    reqDate: document.getElementById('evReqDate').value,
+    recDate: document.getElementById('evRecDate').value,
+    sentSSA: document.getElementById('evSentSSA').value,
+    rfc: document.getElementById('evRFC').value,
+    gap: document.getElementById('evGap').value,
+    update: document.getElementById('evUpdate').value,
+    notes: document.getElementById('evNotes').value
+  };
+  evProviders.push(provider);
+  renderEvProviders();
+  ['evName','evType','evReqDate','evRecDate','evGap','evNotes'].forEach(function(id){
+    var el = document.getElementById(id); if(el) el.value = '';
+  });
+  ['evSentSSA','evRFC','evUpdate'].forEach(function(id){
+    var el = document.getElementById(id); if(el) el.value = '';
+  });
+}
+
+function removeEvProvider(id) {
+  evProviders = evProviders.filter(function(p){ return p.id !== id; });
+  renderEvProviders();
+}
+
+function renderEvProviders() {
+  var el = document.getElementById('evProviderList');
+  if (!el) return;
+  if (evProviders.length === 0) {
+    el.innerHTML = '<div style="text-align:center;padding:40px 24px;color:rgba(255,255,255,.25)"><div style="font-size:32px;margin-bottom:12px;color:rgba(240,192,64,.2)">&#127973;</div><div style="font-family:Georgia,serif;font-size:15px;font-weight:300;margin-bottom:8px;color:rgba(255,255,255,.35)">No providers added yet</div><div style="font-size:12px;line-height:1.75;max-width:340px;margin:0 auto;color:rgba(255,255,255,.3)">SSA requests records from all treating sources listed on your application using the SSA-827. Keeping track of every provider and the status of their records helps you and your representative identify gaps before they become problems at the hearing.</div></div>';
+    return;
+  }
+  var h = '';
+  evProviders.forEach(function(p) {
+    var statusColor = p.recDate ? '#60d060' : (p.reqDate ? '#f0c040' : 'rgba(255,255,255,.3)');
+    var status = p.recDate ? 'Received' : (p.reqDate ? 'Requested' : 'Not requested');
+    h += '<div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:14px 18px;margin-bottom:10px">';
+    h += '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">';
+    h += '<div><div style="font-size:14px;font-weight:600;color:rgba(255,255,255,.85)">' + p.name + '</div>';
+    if (p.type) h += '<div style="font-size:11px;color:rgba(255,255,255,.4);margin-top:2px">' + p.type + '</div>';
+    h += '</div>';
+    h += '<div style="display:flex;align-items:center;gap:10px">';
+    h += '<span style="font-size:11px;color:' + statusColor + ';border:1px solid ' + statusColor + ';padding:3px 10px;border-radius:12px">' + status + '</span>';
+    h += '<button onclick="removeEvProvider(' + p.id + ')" style="background:rgba(220,60,60,.1);border:1px solid rgba(220,60,60,.2);color:#ff7070;padding:3px 10px;border-radius:5px;font-size:11px;cursor:pointer">Remove</button>';
+    h += '</div></div>';
+    h += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;font-size:11px">';
+    if (p.reqDate) h += '<div><span style="color:rgba(255,255,255,.3)">Requested: </span><span style="color:rgba(255,255,255,.6)">' + p.reqDate + '</span></div>';
+    if (p.recDate) h += '<div><span style="color:rgba(255,255,255,.3)">Received: </span><span style="color:rgba(255,255,255,.6)">' + p.recDate + '</span></div>';
+    if (p.sentSSA) h += '<div><span style="color:rgba(255,255,255,.3)">Sent to SSA: </span><span style="color:rgba(255,255,255,.6)">' + p.sentSSA + '</span></div>';
+    if (p.rfc) h += '<div><span style="color:rgba(255,255,255,.3)">RFC: </span><span style="color:rgba(255,255,255,.6)">' + p.rfc + '</span></div>';
+    if (p.gap) h += '<div><span style="color:rgba(255,255,255,.3)">Gap: </span><span style="color:#f0c040">' + p.gap + '</span></div>';
+    if (p.update) h += '<div><span style="color:rgba(255,255,255,.3)">Update needed: </span><span style="color:rgba(255,255,255,.6)">' + p.update + '</span></div>';
+    h += '</div>';
+    if (p.notes) h += '<div style="margin-top:8px;font-size:11px;color:rgba(255,255,255,.4);font-style:italic">' + p.notes + '</div>';
+    h += '</div>';
+  });
+  el.innerHTML = h;
+}
 
 </script>
 </body>

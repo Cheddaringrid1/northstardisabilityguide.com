@@ -5,7 +5,8 @@
 <title>North Star Disability Guide</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: Arial, sans-serif; background: #0a0e1a; color: #fff; min-height: 100vh; overflow: hidden; }
+  html, body { height: 100%; }
+  body { font-family: Arial, sans-serif; background: #0a0e1a; color: #fff; height: 100%; overflow: hidden; }
   .stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
   .star { position: absolute; background: white; border-radius: 50%; animation: twinkle 3s infinite alternate; }
   @keyframes twinkle { 0% { opacity: 0.08; } 100% { opacity: 0.4; } }
@@ -39,7 +40,7 @@
   .unm { font-size: 12px; color: rgba(255,255,255,0.6); }
   .ust { font-size: 10px; color: rgba(255,255,255,0.25); }
 
-  .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+  .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; height: 100vh; }
   .topbar { height: 54px; flex-shrink: 0; background: rgba(10,14,26,0.98); border-bottom: 1px solid rgba(255,255,255,0.07); display: flex; align-items: center; justify-content: space-between; padding: 0 24px; }
   .tbl { display: flex; align-items: center; gap: 12px; }
   .hb { background: none; border: none; color: rgba(255,255,255,0.4); cursor: pointer; font-size: 18px; padding: 4px; }
@@ -51,9 +52,9 @@
   .tp.r { background: rgba(200,60,60,0.1); border: 1px solid rgba(200,60,60,0.25); color: #ff8080; }
   .tp.g { background: rgba(240,192,64,0.07); border: 1px solid rgba(240,192,64,0.18); color: #f0c040; }
 
-  .ct { flex: 1; overflow: hidden; position: relative; }
-  .sc { position: absolute; inset: 0; overflow-y: auto; display: none; padding: 32px 36px; }
-  .sc.on { display: block; animation: fi 0.2s ease; }
+  .ct { flex: 1; overflow: auto; position: relative; }
+  .sc { display: none; padding: 32px 36px; overflow-y: auto; height: 100%; box-sizing: border-box; }
+  .sc.on { display: block; }
   @keyframes fi { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; } }
   .sc::-webkit-scrollbar { width: 4px; }
   .sc::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
@@ -281,6 +282,8 @@
     </div>
     <div class="ct">
 
+
+
       <!-- DASHBOARD -->
       <div class="sc on" id="s-db">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:28px">
@@ -439,7 +442,7 @@
         <div class="disc">North Star is an informational and organizational tool only. It does not provide legal advice. Consult your attorney or advocate regarding how income affects your specific claim.</div>
       </div>
 
-    <div class="sc" id="s-rf" style="padding:0">
+    <div class="sc" id="s-rf" style="padding:0;height:calc(100vh - 54px)">
         <div class="two-panel">
           <div class="left-panel w280">
             <div class="lp-hdr"><h2>RFC <span>Forms Library</span></h2><p>29 RFC forms for doctors to complete. Click any form to view details.</p></div>
@@ -596,7 +599,7 @@
         </div></div>
 
       <!-- GLOSSARY -->
-    <div class="sc" id="s-gl" style="padding:0">
+    <div class="sc" id="s-gl" style="padding:0;height:calc(100vh - 54px)">
       <div class="two-panel">
         <div class="left-panel w260">
           <div class="lp-hdr"><h2>Plain English <span>Glossary</span></h2><p>100 SSA terms explained clearly. No legal jargon.</p></div>
@@ -609,7 +612,7 @@
       </div>
     </div>
       <!-- BLUE BOOK -->
-    <div class="sc" id="s-bb" style="padding:0">
+    <div class="sc" id="s-bb" style="padding:0;height:calc(100vh - 54px)">
       <div class="two-panel">
         <div class="left-panel w280">
           <div class="lp-hdr"><h2>Blue Book <span>Reference</span></h2><p>SSA Listing of Impairments in plain English.</p></div>
@@ -622,7 +625,7 @@
       </div>
     </div>
     <!-- RULINGS -->
-    <div class="sc" id="s-ru" style="padding:0">
+    <div class="sc" id="s-ru" style="padding:0;height:calc(100vh - 54px)">
       <div class="two-panel">
         <div class="left-panel w280">
           <div class="lp-hdr"><h2>SSA <span>Rulings</span></h2><p>Key Social Security Rulings. Binding on all ALJs.</p></div>
@@ -635,7 +638,7 @@
       </div>
     </div>
     <!-- FAQs -->
-    <div class="sc" id="s-fq" style="padding:0">
+    <div class="sc" id="s-fq" style="padding:0;height:calc(100vh - 54px)">
       <div class="two-panel">
         <div class="left-panel w260">
           <div class="lp-hdr"><h2>Frequently Asked <span>Questions</span></h2><p>Common questions answered in plain English.</p></div>
@@ -647,7 +650,7 @@
       </div>
     </div>
     <!-- SSA FORMS -->
-    <div class="sc" id="s-sf" style="padding:0">
+    <div class="sc" id="s-sf" style="padding:0;height:calc(100vh - 54px)">
       <div class="two-panel">
         <div class="left-panel w280">
           <div class="lp-hdr"><h2>SSA <span>Official Forms</span></h2><p>Official forms linking directly to ssa.gov.</p></div>
@@ -786,7 +789,7 @@
       </div>
     </div>
     <!-- HEARING OFFICES -->
-    <div class="sc" id="s-ho" style="padding:0">
+    <div class="sc" id="s-ho" style="padding:0;height:calc(100vh - 54px)">
       <div class="two-panel">
         <div class="left-panel w280">
           <div class="lp-hdr"><h2>Hearing <span>Offices</span></h2><p>SSA hearing offices by state. Find contact information for the office handling your case.</p></div>
@@ -798,9 +801,11 @@
         <div class="right-panel" id="hoRight">
           <div class="rp-empty"><div class="rp-e-ic">&#127963;</div><h3>Select a hearing office</h3><p>Find the office assigned to your case. Contact information, region, and notes on each office.</p></div>
         </div>
-      </div>
+
     </div>
   </div>
+</div>
+
 <script>
 // ── DATA (IIFEs prevent variable conflicts) ─────────────────────────
 (function(){
